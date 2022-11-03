@@ -7,7 +7,7 @@ const TrilhaSchema = new Schema({
     title: String,
     description: String,
     modules: [{
-        id: ObjectId,
+        code: Number,
         title: String,
         description: String
     }]

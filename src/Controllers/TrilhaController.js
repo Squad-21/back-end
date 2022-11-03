@@ -1,4 +1,5 @@
 const TrilhaModel = require('../Models/Trilha')
+const NotionController = require('./NotionController')
 
 class TrilhaController {
     async store(req, res) {
