@@ -1,9 +1,10 @@
-const startDB = require('./mongodb')
+const startDB = require('./mongodb');
+require('dotenv').config();
 
 class Loaders {
-    start() {
-        startDB();
-    }
+  start() {
+    startDB();
+  }
 }
 
 module.exports = new Loaders();
