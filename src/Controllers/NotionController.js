@@ -1,10 +1,27 @@
-const NotionModel = require('../Models/Notion')
+const NotionModel = require('../Models/Notion');
+const TrilhaModel = require('../Models/Trilha');
 
 class NotionController {
     async store(req, res) {
-        const newNotion = await NotionModel.create(req.body)
+        const trilhaID = req.body.trilha
+        const moduloID = req.body.modulo
 
-        return res.status(200).json(newNotion)
+        try {
+            const trilha = await TrilhaModel.findById(trilhaID)
+            const modulo = trilha?.modules.find(modulo => modulo.code == moduloID)
+
+            if(!trilha || !modulo) {
+                return res.status(404).json({message: `${!trilha? 'Trilha' : 'Modulo'} não existe`})
+            } 
+
+            const newNotion = await NotionModel.create(req.body)
+
+            return res.status(200).json(newNotion)
+
+        } catch(e) {
+            console.log(e);
+            return res.status(404).json({message: 'Erro ao criar notion'})
+        }
     }
 
     async index(req, res) {
@@ -21,8 +38,19 @@ class NotionController {
 
     async update(req, res) {
         const {id} = req.params;
+        const trilhaID = req.body.trilha
+        const moduloID = req.body.modulo
+
+        req.body.updatedAt = Date.now()
 
         try {
+            
+            const trilha = await TrilhaModel.findById(trilhaID)
+            const modulo = trilha?.modules.find(modulo => modulo.code == moduloID)
+
+            if(!trilha || !modulo) {
+                return res.status(404).json({message: `${!trilha? 'Trilha' : 'Modulo'} não existe`})
+            } 
 
             await NotionModel.findByIdAndUpdate(id, req.body)
 

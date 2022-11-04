@@ -3,15 +3,25 @@ const NotionController = require('./NotionController')
 
 class TrilhaController {
     async store(req, res) {
-        const newTrilha = await TrilhaModel.create(req.body)
+        try {
+            const newTrilha = await TrilhaModel.create(req.body)
 
-        return res.status(200).json(newTrilha)
+            return res.status(200).json(newTrilha)
+        } catch(e) {
+            console.log(e)
+            return res.status(404).json({message: 'Erro ao criar trilha'})
+        }
     }
 
     async index(req, res) {
-        const trilhas = await TrilhaModel.find()
+        try{
+            const trilhas = await TrilhaModel.find()
 
-        return res.status(200).json(trilhas)
+            return res.status(200).json(trilhas)
+        } catch(e) {
+            console.log(e)
+            return res.status(404).json({message: 'Erro ao obter trilhas'})
+        }
     }
 
     async show(req, res) {
@@ -35,6 +45,7 @@ class TrilhaController {
 
     async update(req, res) {
         const {id} = req.params;
+        req.body.updatedAt = Date.now()
 
         try {
 

@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const startDB = async () => {
   await mongoose.connect(
-    `mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@cluster0.ml7wdi3.mongodb.net/database?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.DB_LOGIN || 'admin'}:${process.env.DB_PASSWORD || 'admin'}@cluster0.ml7wdi3.mongodb.net/database?retryWrites=true&w=majority`
   );
 };
 
