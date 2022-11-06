@@ -1,25 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const NotionController = require('../Controllers/NotionController');
+const authMiddleware = require('../middlewares/authenticate');
 
 // Retornar os notions de uma trilha
-router.get('/:id', (req, res) => {
-  res.send(`GET NOTION ${req.params.id}`);
-});
+router.get('/:id', NotionController.index);
 
 // Adicionar nova notion
-router.post('/', (req, res) => {
-  res.send('POST NOTION');
-});
+router.post('/', authMiddleware, NotionController.store);
 
 // Atualizar uma notion específica
-router.put('/:id', (req, res) => {
-  res.send(`PUT NOTION ${req.params.id}`);
-});
+router.put('/:id', authMiddleware, NotionController.update);
 
 // Deletar uma notion específica
-router.delete('/:id', (req, res) => {
-  res.send(`DELETE NOTION ${req.params.id}`);
-});
+router.delete('/:id', authMiddleware, NotionController.delete);
 
 module.exports = router;
