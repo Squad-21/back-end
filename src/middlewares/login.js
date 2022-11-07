@@ -27,7 +27,7 @@ module.exports = async(req, res, next) => {
 
         const user = await UserModel.findById(decoded.id)
 
-        if(!user.admin) {
+        if(!user) {
             return res.status(401).json({
                 message: 'Não autorizado'
             })
