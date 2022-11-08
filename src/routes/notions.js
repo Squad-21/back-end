@@ -22,6 +22,9 @@ router.get('/:id/comment', loginMiddleware, NotionController.indexComment);
 // Deletar comentário de uma notion
 router.delete('/:id/comment', authMiddleware, NotionController.deleteComment);
 
+// Deletar comentário de uma notion
+router.post('/:id/done', loginMiddleware, NotionController.markAsDone);
+
 // Adicionar nova notion
 router.post('/', authMiddleware, NotionController.store);
 

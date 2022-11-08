@@ -1,6 +1,7 @@
 const CommentModel = require('../Models/Comment');
 const NotionModel = require('../Models/Notion');
 const TrilhaModel = require('../Models/Trilha');
+const UserModel = require('../Models/User');
 
 class NotionController {
   async store(req, res) {
@@ -95,7 +96,8 @@ class NotionController {
           await NotionModel.findByIdAndUpdate(id, notion);
           
           return res.status(201).json({
-            message: `Curtida confirmada`
+            message: `Curtida confirmada`,
+            likes: notion.likes
           })
         }
 
@@ -104,7 +106,8 @@ class NotionController {
       await NotionModel.findByIdAndUpdate(id, notion);
 
       return res.status(201).json({
-        message: `Curtida removida`
+        message: `Curtida removida`,
+        likes: notion.likes
       })
 
       }
@@ -142,7 +145,8 @@ class NotionController {
           await NotionModel.findByIdAndUpdate(id, notion);
           
           return res.status(201).json({
-            message: `Descurtida confirmada`
+            message: `Descurtida confirmada`,
+            unlikes: notion.unlikes
           })
         }
 
@@ -151,7 +155,8 @@ class NotionController {
       await NotionModel.findByIdAndUpdate(id, notion);
 
       return res.status(201).json({
-        message: `Descurtida removida`
+        message: `Descurtida removida`,
+        unlikes: notion.unlikes
       })
 
       }
@@ -227,6 +232,51 @@ class NotionController {
       return res.status(500).json({ message: 'Falha ao deletar comentário' });
     }
   }
+
+  async markAsDone(req, res) {
+    const { id } = req.params;
+    const userID = req.headers.user;
+
+    try {
+      const notion = await NotionModel.findById(id);
+
+      if(!notion) return res.status(404).json({
+          message: 'Notion não existe'
+        });
+
+      let user = await UserModel.findById(userID)
+      const notionAlreadyHasBeenDone = user.notions.find(notion => notion.notionID == id)
+
+      if(!user) return res.status(404).json({
+        message: 'Usuário não existe'
+      });
+
+      if(notionAlreadyHasBeenDone) return res.status(401).json({
+        message: 'Notion já completa'
+      });
+
+      user.notions.push({
+        notionID: id,
+        trilhaID: notion.trilha,
+        modulo: notion.modulo,
+        doneAt: () => Date.now()
+      })
+
+      const userUpdated = await UserModel.findByIdAndUpdate(userID, user)
+
+      return res.status(201).json(userUpdated);
+      
+    } catch(e) {
+      return res.status(500).json({
+        message: 'Falha ao marcar notion como completa',
+        error: e 
+      });
+    }
+
+  }
 }
 
 module.exports = new NotionController();
+
+
+/*eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNmFiOTljYjhkYjgwOTA4ZGE1OWJmYSIsImlhdCI6MTY2NzkzODcxNywiZXhwIjoxNjY4MDI1MTE3fQ.jeCm6GEUdimXMG4jOBj8Cw-SbfaCA4OuqQMb0QJ4GhA*/

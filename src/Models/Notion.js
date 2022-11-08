@@ -12,7 +12,7 @@ const NotionSchema = new Schema({
     required: true,
   },
   modulo: {
-    type: String,
+    type: Number,
     required: true,
   },
   title: {

@@ -1,3 +1,5 @@
+const NotionModel = require('../Models/Notion');
+const RelatedContentModel = require('../Models/RelatedContent');
 const TrilhaModel = require('../Models/Trilha');
 const NotionController = require('./NotionController');
 
@@ -28,13 +30,19 @@ class TrilhaController {
     const { id } = req.params;
 
     try {
-      const trilha = await TrilhaModel.findById(id);
+      let trilha = await TrilhaModel.findById(id);
+      const relatedContents = await RelatedContentModel.find({ trilhas: { $in: id}})
+      const notions = await NotionModel.find({trilha: id})
 
       if (!trilha) {
         return res.status(404).json({ message: 'Trilha não existe' });
       }
 
-      return res.status(200).json(trilha);
+      return res.status(200).json({
+        trilha: trilha,
+        notions: notions,
+        related: relatedContents
+      });
     } catch (e) {
       console.log(e);
       return res.status(404).json({ message: 'Trilha não existe' });

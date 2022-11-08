@@ -22,6 +22,29 @@ const UserSchema = new Schema({
         message: props => `${props.value} não é um e-mail válido`
     }
   },
+  notions: {
+    type: [{
+      notionID: {
+        type: ObjectId,
+        immutable: true,
+      },
+      trilhaID: {
+        type: ObjectId,
+        immutable: true,
+      },
+      modulo: {
+        type: Number,
+        required: true,
+        immutable: true,
+      },
+      doneAt: {
+        type: Date,
+        default: () => Date.now(),
+        immutable: true
+      }
+    }],
+    default: []
+  },
   password: {
     type: String,
     required: true,
