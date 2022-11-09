@@ -3,19 +3,19 @@ const router = express.Router();
 const CourseController = require('../Controllers/CourseController');
 const authMiddleware = require('../middlewares/authenticate');
 
-// Retornar todas as courses
+// Retornar todos os cursos
 router.get('/', CourseController.index);
 
-// Retornar uma course específica
+// Retornar um courso específico
 router.get('/:id', CourseController.show);
 
-// Adicionar nova course
+// Adicionar novo courso
 router.post('/', authMiddleware, CourseController.store);
 
-// Atualizar uma course específica
+// Atualizar um courso específico
 router.put('/:id', authMiddleware, CourseController.update);
 
-// Deletar uma course específica
+// Remover um courso específico
 router.delete('/:id', authMiddleware, CourseController.delete);
 
 module.exports = router;

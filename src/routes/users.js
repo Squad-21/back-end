@@ -12,7 +12,7 @@ router.get('/users', authMiddleware, UserController.index);
 // Retornar dados do usuário
 router.get('/:id', UserController.show);
 
-// Deletar usuário
+// Remover usuário
 router.delete('/:id', authMiddleware, UserController.delete);
 
 // Atualizar dados de um usuário
