@@ -8,10 +8,13 @@ class TrilhaController {
     try {
       const newTrilha = await TrilhaModel.create(req.body);
 
-      return res.status(200).json(newTrilha);
+      return res.status(201).json(newTrilha);
     } catch (e) {
       console.log(e);
-      return res.status(404).json({ message: 'Erro ao criar trilha' });
+      return res.status(500).json({
+        message: 'Erro ao criar trilha',
+        error: e.message
+      });
     }
   }
 
@@ -22,7 +25,10 @@ class TrilhaController {
       return res.status(200).json(trilhas);
     } catch (e) {
       console.log(e);
-      return res.status(404).json({ message: 'Erro ao obter trilhas' });
+      return res.status(500).json({
+        message: 'Erro ao obter trilhas',
+        error: e.message
+      });
     }
   }
 
@@ -34,9 +40,7 @@ class TrilhaController {
       const relatedContents = await RelatedContentModel.find({ trilhas: { $in: id } });
       const notions = await NotionModel.find({ trilha: id });
 
-      if (!trilha) {
-        return res.status(404).json({ message: 'Trilha não existe' });
-      }
+      if (!trilha) return res.status(404).json({ message: 'Trilha não existe' });
 
       return res.status(200).json({
         trilha: trilha,
