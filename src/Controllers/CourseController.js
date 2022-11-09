@@ -12,7 +12,7 @@ class CourseController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Erro ao criar course',
+        message: 'Erro ao criar curso.',
         error: e.message,
       });
     }
@@ -26,7 +26,7 @@ class CourseController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Erro ao obter courses',
+        message: 'Erro ao obter cursos.',
         error: e.message,
       });
     }
@@ -40,7 +40,7 @@ class CourseController {
       const relatedContents = await RelatedContentModel.find({ courses: { $in: id } });
       const lessons = await LessonModel.find({ course: id });
 
-      if (!course) return res.status(404).json({ message: 'Course não existe' });
+      if (!course) return res.status(404).json({ message: 'Curso não existe' });
 
       return res.status(200).json({
         course: course,
@@ -50,7 +50,7 @@ class CourseController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Course não existe',
+        message: 'Curso não existe.',
         error: e.message,
       });
     }
@@ -63,11 +63,11 @@ class CourseController {
     try {
       await CourseModel.findByIdAndUpdate(id, req.body);
 
-      return res.status(200).json({ message: 'Course atualizada' });
+      return res.status(200).json({ message: 'Curso atualizado.' });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Falha ao atualizar course',
+        message: 'Erro ao atualizar curso.',
         error: e.message,
       });
     }
@@ -78,12 +78,12 @@ class CourseController {
     try {
       const courseDeleted = await CourseModel.findByIdAndDelete(id);
 
-      if (!courseDeleted) return res.status(404).json({ message: 'Course não existe' });
+      if (!courseDeleted) return res.status(404).json({ message: 'Curso não existe.' });
 
-      return res.status(200).json({ message: `Course ${id} deletada com sucesso` });
+      return res.status(200).json({ message: `Curso "${id}" removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao deletar course',
+        message: 'Erro ao remover curso.',
         error: e.message,
       });
     }

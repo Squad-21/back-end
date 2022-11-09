@@ -16,7 +16,7 @@ const UserSchema = new Schema({
     lowercase: true,
     validate: {
       validator: (v) => v.indexOf('@') != -1,
-      message: (props) => `${props.value} não é um e-mail válido`,
+      message: (props) => `${props.value} não é um e-mail válido.`,
     },
   },
   avatar: {

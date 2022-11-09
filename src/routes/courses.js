@@ -10,12 +10,12 @@ router.get('/', CourseController.index);
 router.get('/:id', CourseController.show);
 
 // Adicionar nova course
-router.post('/', CourseController.store);
+router.post('/', authMiddleware, CourseController.store);
 
 // Atualizar uma course específica
-router.put('/:id', CourseController.update);
+router.put('/:id', authMiddleware, CourseController.update);
 
 // Deletar uma course específica
-router.delete('/:id', CourseController.delete);
+router.delete('/:id', authMiddleware, CourseController.delete);
 
 module.exports = router;

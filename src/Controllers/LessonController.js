@@ -12,7 +12,7 @@ class LessonController {
       const course = await CourseModel.findById(courseID);
       const module = course?.modules.find((module) => module.code == moduleID);
 
-      if (!course || !module) return res.status(404).json({ message: `${!course ? 'Course' : 'Module'} não existe` });
+      if (!course || !module) return res.status(404).json({ message: `${!course ? 'Curso' : 'Módulo'} não existe.` });
 
       const newLesson = await LessonModel.create(req.body);
 
@@ -20,7 +20,7 @@ class LessonController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Erro ao criar lesson',
+        message: 'Erro ao criar aula.',
         error: e.message,
       });
     }
@@ -35,7 +35,7 @@ class LessonController {
       return res.status(200).json(lessons);
     } catch (e) {
       return res.status(500).json({
-        message: 'Erro ao recuperar lessons',
+        message: 'Erro ao recuperar aulas.',
         error: e.message,
       });
     }
@@ -52,7 +52,7 @@ class LessonController {
       const course = await CourseModel.findById(courseID);
       const module = course?.modules.find((module) => module.code == moduleID);
 
-      if (!course || !module) return res.status(404).json({ message: `${!course ? 'Course' : 'Module'} não existe` });
+      if (!course || !module) return res.status(404).json({ message: `${!course ? 'Curso' : 'Módulo'} não existe.` });
 
       const newLesson = await LessonModel.findByIdAndUpdate(id, req.body);
 
@@ -60,7 +60,7 @@ class LessonController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Falha ao atualizar lesson',
+        message: 'Erro ao atualizar aula.',
         error: e.message,
       });
     }
@@ -71,12 +71,12 @@ class LessonController {
     try {
       const lessonDeleted = await LessonModel.findByIdAndDelete(id);
 
-      if (!lessonDeleted) return res.status(404).json({ message: 'Lesson não existe' });
+      if (!lessonDeleted) return res.status(404).json({ message: 'Aula não existe.' });
 
-      return res.status(200).json({ message: `Lesson ${id} deletada com sucesso` });
+      return res.status(200).json({ message: `Aula "${id}" removida com sucesso.` });
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao deletar lesson',
+        message: 'Erro ao remover aula.',
         error: e,
       });
     }
@@ -92,7 +92,7 @@ class LessonController {
 
       if (!lesson)
         return res.status(404).json({
-          message: `Lesson não existe`,
+          message: `Aula não existe.`,
         });
 
       if (lessonAlreadyHasLike) {
@@ -101,7 +101,7 @@ class LessonController {
         await LessonModel.findByIdAndUpdate(id, lesson);
 
         return res.status(200).json({
-          message: `Curtida removida`,
+          message: `Curtida removida.`,
           likes: lesson.likes,
         });
       }
@@ -115,13 +115,13 @@ class LessonController {
       await LessonModel.findByIdAndUpdate(id, lesson);
 
       return res.status(200).json({
-        message: `Curtida confirmada`,
+        message: `Curtida confirmada.`,
         likes: lesson.likes,
       });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: `Erro ao dar like`,
+        message: `Erro ao curtir.`,
         error: e.message,
       });
     }
@@ -137,7 +137,7 @@ class LessonController {
 
       if (!lesson)
         return res.status(404).json({
-          message: `Lesson não existe`,
+          message: `Aula não existe.`,
         });
 
       if (lessonAlreadyHasUnlike) {
@@ -146,7 +146,7 @@ class LessonController {
         await LessonModel.findByIdAndUpdate(id, lesson);
 
         return res.status(200).json({
-          message: `Descurtida removida`,
+          message: `Descurtida removida.`,
           unlikes: lesson.unlikes,
         });
       }
@@ -160,13 +160,13 @@ class LessonController {
       await LessonModel.findByIdAndUpdate(id, lesson);
 
       return res.status(200).json({
-        message: `Descurtida confirmada`,
+        message: `Descurtida confirmada.`,
         unlikes: lesson.unlikes,
       });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: `Erro ao descurtir lesson`,
+        message: `Erro ao descurtir aula.`,
         error: e.message,
       });
     }
@@ -184,7 +184,7 @@ class LessonController {
 
       if (!lesson)
         return res.status(404).json({
-          message: `Lesson não existe`,
+          message: `Aula não existe.`,
         });
 
       const newComment = await CommentModel.create(req.body);
@@ -193,7 +193,7 @@ class LessonController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: `Erro ao comentar lesson`,
+        message: `Erro ao comentar aula.`,
         error: e.message,
       });
     }
@@ -208,7 +208,7 @@ class LessonController {
       return res.status(200).json(comments);
     } catch (e) {
       return res.status(500).json({
-        message: 'Erro ao recuperar comentários',
+        message: 'Erro ao recuperar comentários.',
         error: e.message,
       });
     }
@@ -220,12 +220,12 @@ class LessonController {
     try {
       const commentDeleted = await CommentModel.findByIdAndDelete(id);
 
-      if (!commentDeleted) return res.status(404).json({ message: 'Comentário não existe' });
+      if (!commentDeleted) return res.status(404).json({ message: 'Comentário não existe.' });
 
-      return res.status(200).json({ message: `Comentário ${id} deletado com sucesso` });
+      return res.status(200).json({ message: `Comentário "${id}" removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao deletar comentário',
+        message: 'Erro ao remover comentário.',
         error: e.message,
       });
     }
@@ -240,7 +240,7 @@ class LessonController {
 
       if (!lesson)
         return res.status(404).json({
-          message: 'Lesson não existe',
+          message: 'Aula não existe.',
         });
 
       let user = await UserModel.findById(userID);
@@ -248,12 +248,12 @@ class LessonController {
 
       if (!user)
         return res.status(404).json({
-          message: 'Usuário não existe',
+          message: 'Usuário não existe.',
         });
 
       if (lessonAlreadyHasBeenDone)
         return res.status(409).json({
-          message: 'Lesson já completa',
+          message: 'Aula já completada.',
         });
 
       user.lessons.push({
@@ -268,7 +268,7 @@ class LessonController {
       return res.status(201).json(userUpdated);
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao marcar lesson como completa',
+        message: 'Erro ao marcar aula como completa.',
         error: e.message,
       });
     }

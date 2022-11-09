@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
   try {
     if (!authHeader) {
       return res.status(401).json({
-        message: 'Não autorizado',
+        message: 'Não autorizado.',
       });
     }
 
@@ -17,14 +17,14 @@ module.exports = async (req, res, next) => {
 
     if (parts.length != 2 || schema.indexOf('Bearer') != 0) {
       return res.status(401).json({
-        message: 'Token inválido',
+        message: 'Token inválido.',
       });
     }
 
     jwt.verify(token, authConfig.secret, async (error, decoded) => {
       if (error) {
         return res.status(401).json({
-          message: 'Erro ao autenticar',
+          message: 'Erro ao autenticar.',
         });
       }
 
@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
 
       if (!user) {
         return res.status(401).json({
-          message: 'Não autorizado',
+          message: 'Não autorizado.',
         });
       }
 
@@ -42,7 +42,7 @@ module.exports = async (req, res, next) => {
     });
   } catch (e) {
     return res.status(500).json({
-      message: 'Erro ao autenticar',
+      message: 'Erro ao autenticar.',
       error: e,
     });
   }
