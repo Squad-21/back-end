@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Squad-21 API
+  description: Squad-21 API Documentation
+  contact:
+    email: email@email.com
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000/
+tags:
+  - name: trilha
+    description: Tudo sobre trilhas.
+paths:
+  /trilhas:
+    get:
+      tags:
+        - trilha
+      summary: Retorna todas as trilhas
+      description: Retorna todas as trilhas
+      operationId: getTrilhas
+      responses:
+        '200':
+          description: Todas as trilhas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trilha'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trilha'
+        '400':
+          description: Invalid
+    post:
+      tags:
+        - trilha
+      summary: Adiciona uma nova trilha.
+      description: Adiciona uma nova trilha.
+      operationId: addTrilha
+      requestBody:
+        description: Cria uma nova trilha.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trilha'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Trilha'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trilha'
+        required: true
+      responses:
+        '200':
+          description: Trilha criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trilha'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Trilha'
+        '404':
+          description: Invalid input
+  /trilhas/{trilhaId}:
+    get:
+      tags:
+        - trilha
+      summary: Acha uma trilha pelo ID
+      description: Retorna uma unica trilha
+      operationId: getTrilhaById
+      parameters:
+        - name: trilhaId
+          in: path
+          description: ID da trilha que deseja de retorno
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trilha'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Trilha'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+    put:
+      tags:
+        - trilha
+      summary: Atualiza uma trilha existente
+      description: Atualiza uma trilha existente pelo ID
+      operationId: updateTrilha
+      parameters:
+        - name: trilhaId
+          in: path
+          description: ID da trilha que deseja de retorno
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Atualiza uma trilha especifica.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trilha'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Trilha'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trilha'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trilha'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Trilha'
+        '400':
+          description: Invalid ID
+        '404':
+          description: Trilha not found
+        '405':
+          description: Validation error
+    delete:
+      tags:
+        - trilha
+      summary: Remove uma trilha
+      description: Remove uma trilha
+      operationId: deleteTrilha
+      parameters:
+        - name: trilhaId
+          in: path
+          description: ID da trilha que deseja remover
+          required: true
+          schema:
+            type: string
+      responses:
+        400:
+          description: Invalid trilha ID
+
+components:
+  schemas:
+    Trilha:
+      required:
+        - title
+        - description
+      type: object
+      properties:
+        title:
+          type: string
+          example: Básico HTML, CSS e Javascript
+        description:
+          type: string
+          example: Aprenda na prática como trabalhar com Html, CSS e JS
+        modules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Modules'
+    Modules:
+      required:
+        - code
+        - title
+        - description
+      type: object
+      properties:
+        code:
+          type: string
+          example: 1
+        title:
+          type: string
+          example: Introdução
+        description:
+          type: string
+          example: Bem vindo ao novo curso! Veja aqui o vamos aprender.
