@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const TrilhaSchema = new Schema({
-  id: ObjectId,
   title: {
     type: String,
     required: true,
@@ -12,22 +11,25 @@ const TrilhaSchema = new Schema({
     type: String,
     required: true,
   },
-  modules: [
-    {
-      code: {
-        type: Number,
-        required: true,
+  modules: {
+    type: [
+      {
+        code: {
+          type: Number,
+          required: true,
+        },
+        title: {
+          type: String,
+          required: true,
+        },
+        description: {
+          type: String,
+          required: true,
+        },
       },
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+    ],
+    default: []
+  },
   createdAt: {
     type: Date,
     default: () => Date.now(),

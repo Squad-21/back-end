@@ -10,7 +10,7 @@ class RelatedContentController {
       console.log(e);
       return res.status(500).json({
         message: 'Erro ao criar conteúdo',
-        error: e,
+        error: e.message,
       });
     }
   }
@@ -23,10 +23,13 @@ class RelatedContentController {
     try {
       await RelatedContentModel.findByIdAndUpdate(id, req.body);
 
-      return res.status(201).json({ message: 'Conteúdo relacionado atualizado' });
+      return res.status(200).json({ message: 'Conteúdo relacionado atualizado' });
     } catch (e) {
       console.log(e);
-      return res.status(500).json({ message: 'Falha ao atualizar conteúdo relacionado' });
+      return res.status(500).json({
+        message: 'Falha ao atualizar conteúdo relacionado',
+        error: e.message
+      });
     }
   }
 
@@ -39,7 +42,10 @@ class RelatedContentController {
 
       return res.status(200).json({ message: `Conteúdo relacionado ${id} deletado com sucesso` });
     } catch (e) {
-      return res.status(500).json({ message: 'Falha ao deletar conteúdo relacionado' });
+      return res.status(500).json({
+        message: 'Falha ao deletar conteúdo relacionado',
+        error: e.message
+      });
     }
   }
 }

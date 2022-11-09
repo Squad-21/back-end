@@ -45,7 +45,10 @@ class TrilhaController {
       });
     } catch (e) {
       console.log(e);
-      return res.status(404).json({ message: 'Trilha não existe' });
+      return res.status(500).json({
+        message: 'Trilha não existe',
+        error: e.message
+      });
     }
   }
 
@@ -59,7 +62,10 @@ class TrilhaController {
       return res.status(200).json({ message: 'Trilha atualizada' });
     } catch (e) {
       console.log(e);
-      return res.status(404).json({ message: 'Falha ao atualizar trilha' });
+      return res.status(500).json({
+        message: 'Falha ao atualizar trilha',
+        error: e.message
+      });
     }
   }
 
@@ -68,13 +74,14 @@ class TrilhaController {
     try {
       const trilhaDeleted = await TrilhaModel.findByIdAndDelete(id);
 
-      if (!trilhaDeleted) {
-        return res.status(404).json({ message: 'Trilha não existe' });
-      }
+      if (!trilhaDeleted) return res.status(404).json({ message: 'Trilha não existe' });
 
       return res.status(200).json({ message: `Trilha ${id} deletada com sucesso` });
     } catch (e) {
-      return res.status(404).json({ message: 'Falha ao deletar trilha' });
+      return res.status(500).json({
+        message: 'Falha ao deletar trilha',
+        error: e.message
+      });
     }
   }
 }

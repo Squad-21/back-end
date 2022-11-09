@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { url } = require('../loaders/cloudinary');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
-  id: {
-    type: ObjectId,
-    immutable: true,
-  },
   name: {
     type: String,
     required: true,
@@ -21,6 +18,16 @@ const UserSchema = new Schema({
       validator: (v) => v.indexOf('@') != -1,
       message: (props) => `${props.value} não é um e-mail válido`,
     },
+  },
+  avatar: {
+    public_id: {
+      type: String,
+      required: true
+    },
+    url: {
+      type: String,
+      required: true
+    }
   },
   notions: {
     type: [

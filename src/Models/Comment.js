@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const CommentSchema = new Schema({
-  id: {
-    type: ObjectId,
-    immutable: true,
-  },
   notionID: {
     type: ObjectId,
     ref: 'notions',

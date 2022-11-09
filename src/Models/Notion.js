@@ -3,12 +3,9 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const NotionSchema = new Schema({
-  id: {
-    type: ObjectId,
-    immutable: true,
-  },
   trilha: {
-    type: String,
+    type: ObjectId,
+    ref: 'trilhas',
     required: true,
   },
   modulo: {
@@ -34,30 +31,36 @@ const NotionSchema = new Schema({
     type: String,
     required: true,
   },
-  likes: [
-    {
-      id: {
-        type: ObjectId,
-        ref: 'users',
+  likes: {
+    type: [
+      {
+        id: {
+          type: ObjectId,
+          ref: 'users',
+        },
+        date: {
+          type: Date,
+          default: () => Date.now(),
+        },
       },
-      date: {
-        type: Date,
-        default: () => Date.now(),
+    ],
+    default: []
+  },
+  unlikes: {
+    type: [
+      {
+        id: {
+          type: ObjectId,
+          ref: 'users',
+        },
+        date: {
+          type: Date,
+          default: () => Date.now(),
+        },
       },
-    },
-  ],
-  unlikes: [
-    {
-      id: {
-        type: ObjectId,
-        ref: 'users',
-      },
-      date: {
-        type: Date,
-        default: () => Date.now(),
-      },
-    },
-  ],
+    ],
+    default: []
+  },
   createdAt: {
     type: Date,
     default: () => Date.now(),

@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const RelatedContentSchema = new Schema({
-  id: {
-    type: ObjectId,
-    immutable: true,
-  },
   trilhas: [
     {
       type: ObjectId,

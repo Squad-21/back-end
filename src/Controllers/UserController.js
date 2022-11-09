@@ -2,10 +2,24 @@ const UserModel = require('../Models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.json');
+const cloudinary = require('../loaders/cloudinary')
 
 const generateToken = (user = {}) => {
   return jwt.sign({ id: user._id }, authConfig.secret, { expiresIn: 86400 });
 };
+
+const uploadAvatar = async(image = File) => {
+  const result = await cloudinary.uploader.upload(image, {
+    folder: 'avatar',
+    width: 300,
+    crop: 'scale'
+  })
+
+  return {
+    public_id: result.public_id,
+    url: result.secure_url
+  }
+}
 
 class UserController {
   async register(req, res) {
@@ -18,7 +32,7 @@ class UserController {
       });
     } catch (e) {
       console.log(e);
-      return res.status(400).json({
+      return res.status(500).json({
         message: `Erro ao criar usuário.`,
         error: e.message,
       });
@@ -31,7 +45,10 @@ class UserController {
 
       return res.status(200).json({ users });
     } catch (e) {
-      return res.status(500).json({ message: 'Erro ao recuperar usuários' });
+      return res.status(500).json({
+        message: 'Erro ao recuperar usuários',
+        error: e.message
+      });
     }
   }
 
@@ -41,15 +58,15 @@ class UserController {
     try {
       const user = await UserModel.findById(id);
 
-      if (!user) {
-        return res.status(404).json({ message: 'Usuário não existe' });
-      }
+      if (!user) return res.status(404).json({ message: 'Usuário não existe' });
+
 
       return res.status(200).json(user);
     } catch (e) {
       console.log(e);
       return res.status(500).json({
         message: `Erro ao recuperar usuário.`,
+        error: e.message
       });
     }
   }
@@ -66,7 +83,10 @@ class UserController {
       return res.status(200).json({ message: 'Dados do usuário atualizado' });
     } catch (e) {
       console.log(e);
-      return res.status(500).json({ message: 'Falha ao atualizar dados do usuário' });
+      return res.status(500).json({
+        message: 'Falha ao atualizar dados do usuário',
+        error: e.message
+      });
     }
   }
 
@@ -75,13 +95,14 @@ class UserController {
     try {
       const deleted = await UserModel.findByIdAndDelete(id);
 
-      if (!deleted) {
-        return res.status(404).json({ message: 'Usuário não existe' });
-      }
+      if (!deleted) return res.status(404).json({ message: 'Usuário não existe' });
 
       return res.status(200).json({ message: `Usuário ${deleted.name} deletado com sucesso` });
     } catch (e) {
-      return res.status(500).json({ message: 'Falha ao deletar usuário' });
+      return res.status(500).json({
+        message: 'Falha ao deletar usuário',
+        error: e.message
+      });
     }
   }
 
@@ -90,13 +111,10 @@ class UserController {
     try {
       const user = await UserModel.findOne({ email }).select('+password');
 
-      if (!user) {
-        return res.status(404).json({ message: 'Usuário não existe' });
-      }
+      if (!user) return res.status(404).json({ message: 'Usuário não existe' });
 
-      if (!(await bcrypt.compare(password, user.password))) {
-        return res.status(400).json({ message: 'Senha inválida' });
-      }
+      if (!(await bcrypt.compare(password, user.password)))  return res.status(401).json({ message: 'Senha inválida' });
+      
 
       user.password = undefined;
 
