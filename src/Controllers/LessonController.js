@@ -1,9 +1,9 @@
 const CommentModel = require('../Models/Comment');
-const NotionModel = require('../Models/Notion');
+const LessonModel = require('../Models/Lesson');
 const CourseModel = require('../Models/Course');
 const UserModel = require('../Models/User');
 
-class NotionController {
+class LessonController {
   async store(req, res) {
     const courseID = req.body.course;
     const moduleID = req.body.module;
@@ -14,13 +14,13 @@ class NotionController {
 
       if (!course || !module) return res.status(404).json({ message: `${!course ? 'Course' : 'Module'} não existe` });
 
-      const newNotion = await NotionModel.create(req.body);
+      const newLesson = await LessonModel.create(req.body);
 
-      return res.status(200).json(newNotion);
+      return res.status(200).json(newLesson);
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Erro ao criar notion',
+        message: 'Erro ao criar lesson',
         error: e.message,
       });
     }
@@ -30,12 +30,12 @@ class NotionController {
     const { id } = req.params;
 
     try {
-      const notions = await NotionModel.find({ course: id });
+      const lessons = await LessonModel.find({ course: id });
 
-      return res.status(200).json(notions);
+      return res.status(200).json(lessons);
     } catch (e) {
       return res.status(500).json({
-        message: 'Erro ao recuperar notions',
+        message: 'Erro ao recuperar lessons',
         error: e.message,
       });
     }
@@ -54,13 +54,13 @@ class NotionController {
 
       if (!course || !module) return res.status(404).json({ message: `${!course ? 'Course' : 'Module'} não existe` });
 
-      const newNotion = await NotionModel.findByIdAndUpdate(id, req.body);
+      const newLesson = await LessonModel.findByIdAndUpdate(id, req.body);
 
-      return res.status(200).json(newNotion);
+      return res.status(200).json(newLesson);
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Falha ao atualizar notion',
+        message: 'Falha ao atualizar lesson',
         error: e.message,
       });
     }
@@ -69,14 +69,14 @@ class NotionController {
   async delete(req, res) {
     const { id } = req.params;
     try {
-      const notionDeleted = await NotionModel.findByIdAndDelete(id);
+      const lessonDeleted = await LessonModel.findByIdAndDelete(id);
 
-      if (!notionDeleted) return res.status(404).json({ message: 'Notion não existe' });
+      if (!lessonDeleted) return res.status(404).json({ message: 'Lesson não existe' });
 
-      return res.status(200).json({ message: `Notion ${id} deletada com sucesso` });
+      return res.status(200).json({ message: `Lesson ${id} deletada com sucesso` });
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao deletar notion',
+        message: 'Falha ao deletar lesson',
         error: e,
       });
     }
@@ -87,36 +87,36 @@ class NotionController {
     const userID = req.headers.user;
 
     try {
-      let notion = await NotionModel.findById(id);
-      const notionAlreadyHasLike = notion.likes?.find((like) => like.id == userID);
+      let lesson = await LessonModel.findById(id);
+      const lessonAlreadyHasLike = lesson.likes?.find((like) => like.id == userID);
 
-      if (!notion)
+      if (!lesson)
         return res.status(404).json({
-          message: `Notion não existe`,
+          message: `Lesson não existe`,
         });
 
-      if (notionAlreadyHasLike) {
-        notion.likes = notion.likes.filter((like) => like.id != userID);
+      if (lessonAlreadyHasLike) {
+        lesson.likes = lesson.likes.filter((like) => like.id != userID);
 
-        await NotionModel.findByIdAndUpdate(id, notion);
+        await LessonModel.findByIdAndUpdate(id, lesson);
 
         return res.status(200).json({
           message: `Curtida removida`,
-          likes: notion.likes,
+          likes: lesson.likes,
         });
       }
 
-      notion.unlikes = notion.unlikes.filter((unlike) => unlike.id != userID);
+      lesson.unlikes = lesson.unlikes.filter((unlike) => unlike.id != userID);
 
-      notion.likes.push({
+      lesson.likes.push({
         id: userID,
       });
 
-      await NotionModel.findByIdAndUpdate(id, notion);
+      await LessonModel.findByIdAndUpdate(id, lesson);
 
       return res.status(200).json({
         message: `Curtida confirmada`,
-        likes: notion.likes,
+        likes: lesson.likes,
       });
     } catch (e) {
       console.log(e);
@@ -132,41 +132,41 @@ class NotionController {
     const userID = req.headers.user;
 
     try {
-      let notion = await NotionModel.findById(id);
-      const notionAlreadyHasUnlike = notion.unlikes?.find((unlike) => unlike.id == userID);
+      let lesson = await LessonModel.findById(id);
+      const lessonAlreadyHasUnlike = lesson.unlikes?.find((unlike) => unlike.id == userID);
 
-      if (!notion)
+      if (!lesson)
         return res.status(404).json({
-          message: `Notion não existe`,
+          message: `Lesson não existe`,
         });
 
-      if (notionAlreadyHasUnlike) {
-        notion.unlikes = notion.unlikes.filter((unlike) => unlike.id != userID);
+      if (lessonAlreadyHasUnlike) {
+        lesson.unlikes = lesson.unlikes.filter((unlike) => unlike.id != userID);
 
-        await NotionModel.findByIdAndUpdate(id, notion);
+        await LessonModel.findByIdAndUpdate(id, lesson);
 
         return res.status(200).json({
           message: `Descurtida removida`,
-          unlikes: notion.unlikes,
+          unlikes: lesson.unlikes,
         });
       }
 
-      notion.likes = notion.likes.filter((like) => like.id != userID);
+      lesson.likes = lesson.likes.filter((like) => like.id != userID);
 
-      notion.unlikes.push({
+      lesson.unlikes.push({
         id: userID,
       });
 
-      await NotionModel.findByIdAndUpdate(id, notion);
+      await LessonModel.findByIdAndUpdate(id, lesson);
 
       return res.status(200).json({
         message: `Descurtida confirmada`,
-        unlikes: notion.unlikes,
+        unlikes: lesson.unlikes,
       });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: `Erro ao descurtir notion`,
+        message: `Erro ao descurtir lesson`,
         error: e.message,
       });
     }
@@ -177,14 +177,14 @@ class NotionController {
     const userID = req.headers.user;
 
     req.body.author = userID;
-    req.body.notionID = id;
+    req.body.lessonID = id;
 
     try {
-      const notion = await NotionModel.findById(id);
+      const lesson = await LessonModel.findById(id);
 
-      if (!notion)
+      if (!lesson)
         return res.status(404).json({
-          message: `Notion não existe`,
+          message: `Lesson não existe`,
         });
 
       const newComment = await CommentModel.create(req.body);
@@ -193,7 +193,7 @@ class NotionController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: `Erro ao comentar notion`,
+        message: `Erro ao comentar lesson`,
         error: e.message,
       });
     }
@@ -203,7 +203,7 @@ class NotionController {
     const { id } = req.params;
 
     try {
-      const comments = await CommentModel.find({ notionID: id });
+      const comments = await CommentModel.find({ lessonID: id });
 
       return res.status(200).json(comments);
     } catch (e) {
@@ -236,30 +236,30 @@ class NotionController {
     const userID = req.headers.user;
 
     try {
-      const notion = await NotionModel.findById(id);
+      const lesson = await LessonModel.findById(id);
 
-      if (!notion)
+      if (!lesson)
         return res.status(404).json({
-          message: 'Notion não existe',
+          message: 'Lesson não existe',
         });
 
       let user = await UserModel.findById(userID);
-      const notionAlreadyHasBeenDone = user.notions.find((notion) => notion.notionID == id);
+      const lessonAlreadyHasBeenDone = user.lessons.find((lesson) => lesson.lessonID == id);
 
       if (!user)
         return res.status(404).json({
           message: 'Usuário não existe',
         });
 
-      if (notionAlreadyHasBeenDone)
+      if (lessonAlreadyHasBeenDone)
         return res.status(409).json({
-          message: 'Notion já completa',
+          message: 'Lesson já completa',
         });
 
-      user.notions.push({
-        notionID: id,
-        courseID: notion.course,
-        module: notion.module,
+      user.lessons.push({
+        lessonID: id,
+        courseID: lesson.course,
+        module: lesson.module,
         doneAt: () => Date.now(),
       });
 
@@ -268,11 +268,11 @@ class NotionController {
       return res.status(201).json(userUpdated);
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao marcar notion como completa',
+        message: 'Falha ao marcar lesson como completa',
         error: e.message,
       });
     }
   }
 }
 
-module.exports = new NotionController();
+module.exports = new LessonController();

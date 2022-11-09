@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const CommentSchema = new Schema({
-  notionID: {
+  lessonID: {
     type: ObjectId,
-    ref: 'notions',
+    ref: 'lessons',
     required: true,
   },
   author: {

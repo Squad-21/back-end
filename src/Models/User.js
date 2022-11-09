@@ -29,10 +29,10 @@ const UserSchema = new Schema({
       required: true,
     },
   },
-  notions: {
+  lessons: {
     type: [
       {
-        notionID: {
+        lessonID: {
           type: ObjectId,
           immutable: true,
         },

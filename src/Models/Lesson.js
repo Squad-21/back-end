@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const NotionSchema = new Schema({
+const LessonSchema = new Schema({
   course: {
     type: ObjectId,
     ref: 'courses',
@@ -72,6 +72,6 @@ const NotionSchema = new Schema({
   },
 });
 
-const NotionModel = mongoose.model('notions', NotionSchema);
+const LessonModel = mongoose.model('lessons', LessonSchema);
 
-module.exports = NotionModel;
+module.exports = LessonModel;

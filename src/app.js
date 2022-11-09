@@ -3,7 +3,7 @@ const cors = require('cors');
 
 const app = express();
 const coursesRouter = require('./routes/courses');
-const notionRouter = require('./routes/notions');
+const lessonRouter = require('./routes/lessons');
 const authRouter = require('./routes/users');
 const healthRouter = require('./routes/health');
 const apidocsRouter = require('./routes/apidocs');
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/courses', coursesRouter);
-app.use('/notions', notionRouter);
+app.use('/lessons', lessonRouter);
 app.use('/auth', authRouter);
 app.use('/related', relatedRouter);
 app.use('/health', healthRouter);

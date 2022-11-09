@@ -1,7 +1,7 @@
-const NotionModel = require('../Models/Notion');
+const LessonModel = require('../Models/Lesson');
 const RelatedContentModel = require('../Models/RelatedContent');
 const CourseModel = require('../Models/Course');
-const NotionController = require('./NotionController');
+const LessonController = require('./LessonController');
 
 class CourseController {
   async store(req, res) {
@@ -38,13 +38,13 @@ class CourseController {
     try {
       let course = await CourseModel.findById(id);
       const relatedContents = await RelatedContentModel.find({ courses: { $in: id } });
-      const notions = await NotionModel.find({ course: id });
+      const lessons = await LessonModel.find({ course: id });
 
       if (!course) return res.status(404).json({ message: 'Course não existe' });
 
       return res.status(200).json({
         course: course,
-        notions: notions,
+        lessons: lessons,
         related: relatedContents,
       });
     } catch (e) {
