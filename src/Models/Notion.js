@@ -8,7 +8,7 @@ const NotionSchema = new Schema({
     ref: 'courses',
     required: true,
   },
-  modulo: {
+  module: {
     type: Number,
     required: true,
   },

@@ -6,13 +6,13 @@ const UserModel = require('../Models/User');
 class NotionController {
   async store(req, res) {
     const courseID = req.body.course;
-    const moduloID = req.body.modulo;
+    const moduleID = req.body.module;
 
     try {
       const course = await CourseModel.findById(courseID);
-      const modulo = course?.modules.find((modulo) => modulo.code == moduloID);
+      const module = course?.modules.find((module) => module.code == moduleID);
 
-      if (!course || !modulo) return res.status(404).json({ message: `${!course ? 'Course' : 'Modulo'} não existe` });
+      if (!course || !module) return res.status(404).json({ message: `${!course ? 'Course' : 'Module'} não existe` });
 
       const newNotion = await NotionModel.create(req.body);
 
@@ -44,15 +44,15 @@ class NotionController {
   async update(req, res) {
     const { id } = req.params;
     const courseID = req.body.course;
-    const moduloID = req.body.modulo;
+    const moduleID = req.body.module;
 
     req.body.updatedAt = Date.now();
 
     try {
       const course = await CourseModel.findById(courseID);
-      const modulo = course?.modules.find((modulo) => modulo.code == moduloID);
+      const module = course?.modules.find((module) => module.code == moduleID);
 
-      if (!course || !modulo) return res.status(404).json({ message: `${!course ? 'Course' : 'Modulo'} não existe` });
+      if (!course || !module) return res.status(404).json({ message: `${!course ? 'Course' : 'Module'} não existe` });
 
       const newNotion = await NotionModel.findByIdAndUpdate(id, req.body);
 
@@ -259,7 +259,7 @@ class NotionController {
       user.notions.push({
         notionID: id,
         courseID: notion.course,
-        modulo: notion.modulo,
+        module: notion.module,
         doneAt: () => Date.now(),
       });
 

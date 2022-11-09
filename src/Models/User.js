@@ -40,7 +40,7 @@ const UserSchema = new Schema({
           type: ObjectId,
           immutable: true,
         },
-        modulo: {
+        module: {
           type: Number,
           required: true,
           immutable: true,
