@@ -22,12 +22,12 @@ const UserSchema = new Schema({
   avatar: {
     public_id: {
       type: String,
-      required: true
+      required: true,
     },
     url: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   notions: {
     type: [
@@ -36,7 +36,7 @@ const UserSchema = new Schema({
           type: ObjectId,
           immutable: true,
         },
-        trilhaID: {
+        courseID: {
           type: ObjectId,
           immutable: true,
         },

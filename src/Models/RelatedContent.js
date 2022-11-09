@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const RelatedContentSchema = new Schema({
-  trilhas: [
+  courses: [
     {
       type: ObjectId,
-      ref: 'trilhas',
+      ref: 'courses',
     },
   ],
   title: {

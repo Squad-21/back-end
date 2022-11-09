@@ -1,18 +1,18 @@
 const CommentModel = require('../Models/Comment');
 const NotionModel = require('../Models/Notion');
-const TrilhaModel = require('../Models/Trilha');
+const CourseModel = require('../Models/Course');
 const UserModel = require('../Models/User');
 
 class NotionController {
   async store(req, res) {
-    const trilhaID = req.body.trilha;
+    const courseID = req.body.course;
     const moduloID = req.body.modulo;
 
     try {
-      const trilha = await TrilhaModel.findById(trilhaID);
-      const modulo = trilha?.modules.find((modulo) => modulo.code == moduloID);
+      const course = await CourseModel.findById(courseID);
+      const modulo = course?.modules.find((modulo) => modulo.code == moduloID);
 
-      if (!trilha || !modulo) return res.status(404).json({ message: `${!trilha ? 'Trilha' : 'Modulo'} não existe` });
+      if (!course || !modulo) return res.status(404).json({ message: `${!course ? 'Course' : 'Modulo'} não existe` });
 
       const newNotion = await NotionModel.create(req.body);
 
@@ -21,7 +21,7 @@ class NotionController {
       console.log(e);
       return res.status(500).json({
         message: 'Erro ao criar notion',
-        error: e.message
+        error: e.message,
       });
     }
   }
@@ -30,29 +30,29 @@ class NotionController {
     const { id } = req.params;
 
     try {
-      const notions = await NotionModel.find({ trilha: id });
+      const notions = await NotionModel.find({ course: id });
 
       return res.status(200).json(notions);
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao recuperar notions',
-        error: e.message
+        error: e.message,
       });
     }
   }
 
   async update(req, res) {
     const { id } = req.params;
-    const trilhaID = req.body.trilha;
+    const courseID = req.body.course;
     const moduloID = req.body.modulo;
 
     req.body.updatedAt = Date.now();
 
     try {
-      const trilha = await TrilhaModel.findById(trilhaID);
-      const modulo = trilha?.modules.find((modulo) => modulo.code == moduloID);
+      const course = await CourseModel.findById(courseID);
+      const modulo = course?.modules.find((modulo) => modulo.code == moduloID);
 
-      if (!trilha || !modulo) return res.status(404).json({ message: `${!trilha ? 'Trilha' : 'Modulo'} não existe` });
+      if (!course || !modulo) return res.status(404).json({ message: `${!course ? 'Course' : 'Modulo'} não existe` });
 
       const newNotion = await NotionModel.findByIdAndUpdate(id, req.body);
 
@@ -61,7 +61,7 @@ class NotionController {
       console.log(e);
       return res.status(500).json({
         message: 'Falha ao atualizar notion',
-        error: e.message
+        error: e.message,
       });
     }
   }
@@ -77,7 +77,7 @@ class NotionController {
     } catch (e) {
       return res.status(500).json({
         message: 'Falha ao deletar notion',
-        error: e
+        error: e,
       });
     }
   }
@@ -90,9 +90,10 @@ class NotionController {
       let notion = await NotionModel.findById(id);
       const notionAlreadyHasLike = notion.likes?.find((like) => like.id == userID);
 
-      if(!notion) return res.status(404).json({
-        message: `Notion não existe`,
-      });
+      if (!notion)
+        return res.status(404).json({
+          message: `Notion não existe`,
+        });
 
       if (notionAlreadyHasLike) {
         notion.likes = notion.likes.filter((like) => like.id != userID);
@@ -117,7 +118,6 @@ class NotionController {
         message: `Curtida confirmada`,
         likes: notion.likes,
       });
-
     } catch (e) {
       console.log(e);
       return res.status(500).json({
@@ -135,15 +135,16 @@ class NotionController {
       let notion = await NotionModel.findById(id);
       const notionAlreadyHasUnlike = notion.unlikes?.find((unlike) => unlike.id == userID);
 
-      if(!notion) return res.status(404).json({
-        message: `Notion não existe`,
-      });
+      if (!notion)
+        return res.status(404).json({
+          message: `Notion não existe`,
+        });
 
       if (notionAlreadyHasUnlike) {
         notion.unlikes = notion.unlikes.filter((unlike) => unlike.id != userID);
 
         await NotionModel.findByIdAndUpdate(id, notion);
-  
+
         return res.status(200).json({
           message: `Descurtida removida`,
           unlikes: notion.unlikes,
@@ -162,7 +163,6 @@ class NotionController {
         message: `Descurtida confirmada`,
         unlikes: notion.unlikes,
       });
-
     } catch (e) {
       console.log(e);
       return res.status(500).json({
@@ -182,7 +182,8 @@ class NotionController {
     try {
       const notion = await NotionModel.findById(id);
 
-      if (!notion) return res.status(404).json({
+      if (!notion)
+        return res.status(404).json({
           message: `Notion não existe`,
         });
 
@@ -208,7 +209,7 @@ class NotionController {
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao recuperar comentários',
-        error: e.message
+        error: e.message,
       });
     }
   }
@@ -225,7 +226,7 @@ class NotionController {
     } catch (e) {
       return res.status(500).json({
         message: 'Falha ao deletar comentário',
-        error: e.message
+        error: e.message,
       });
     }
   }
@@ -237,24 +238,27 @@ class NotionController {
     try {
       const notion = await NotionModel.findById(id);
 
-      if (!notion) return res.status(404).json({
+      if (!notion)
+        return res.status(404).json({
           message: 'Notion não existe',
         });
 
       let user = await UserModel.findById(userID);
       const notionAlreadyHasBeenDone = user.notions.find((notion) => notion.notionID == id);
 
-      if (!user) return res.status(404).json({
+      if (!user)
+        return res.status(404).json({
           message: 'Usuário não existe',
         });
 
-      if (notionAlreadyHasBeenDone) return res.status(409).json({
+      if (notionAlreadyHasBeenDone)
+        return res.status(409).json({
           message: 'Notion já completa',
         });
 
       user.notions.push({
         notionID: id,
-        trilhaID: notion.trilha,
+        courseID: notion.course,
         modulo: notion.modulo,
         doneAt: () => Date.now(),
       });
@@ -272,4 +276,3 @@ class NotionController {
 }
 
 module.exports = new NotionController();
-

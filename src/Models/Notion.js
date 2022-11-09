@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const NotionSchema = new Schema({
-  trilha: {
+  course: {
     type: ObjectId,
-    ref: 'trilhas',
+    ref: 'courses',
     required: true,
   },
   modulo: {
@@ -44,7 +44,7 @@ const NotionSchema = new Schema({
         },
       },
     ],
-    default: []
+    default: [],
   },
   unlikes: {
     type: [
@@ -59,7 +59,7 @@ const NotionSchema = new Schema({
         },
       },
     ],
-    default: []
+    default: [],
   },
   createdAt: {
     type: Date,

@@ -4,7 +4,7 @@ const NotionController = require('../Controllers/NotionController');
 const authMiddleware = require('../middlewares/authenticate');
 const loginMiddleware = require('../middlewares/login');
 
-// Retornar os notions de uma trilha
+// Retornar os notions de uma course
 router.get('/:id', NotionController.index);
 
 // Dá like numa notion

@@ -8,74 +8,74 @@ info:
 servers:
   - url: http://localhost:3000/
 tags:
-  - name: trilha
-    description: Tudo sobre trilhas.
+  - name: course
+    description: Tudo sobre courses.
 paths:
-  /trilhas:
+  /courses:
     get:
       tags:
-        - trilha
-      summary: Retorna todas as trilhas
-      description: Retorna todas as trilhas
-      operationId: getTrilhas
+        - course
+      summary: Retorna todas as courses
+      description: Retorna todas as courses
+      operationId: getCourses
       responses:
         '200':
-          description: Todas as trilhas.
+          description: Todas as courses.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Trilha'
+                  $ref: '#/components/schemas/Course'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Trilha'
+                  $ref: '#/components/schemas/Course'
         '400':
           description: Invalid
     post:
       tags:
-        - trilha
-      summary: Adiciona uma nova trilha.
-      description: Adiciona uma nova trilha.
-      operationId: addTrilha
+        - course
+      summary: Adiciona uma nova course.
+      description: Adiciona uma nova course.
+      operationId: addCourse
       requestBody:
-        description: Cria uma nova trilha.
+        description: Cria uma nova course.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Trilha'
+              $ref: '#/components/schemas/Course'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Trilha'
+              $ref: '#/components/schemas/Course'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Trilha'
+              $ref: '#/components/schemas/Course'
         required: true
       responses:
         '200':
-          description: Trilha criada com sucesso
+          description: Course criada com sucesso
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trilha'
+                $ref: '#/components/schemas/Course'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Trilha'
+                $ref: '#/components/schemas/Course'
         '404':
           description: Invalid input
-  /trilhas/{trilhaId}:
+  /courses/{courseId}:
     get:
       tags:
-        - trilha
-      summary: Acha uma trilha pelo ID
-      description: Retorna uma unica trilha
-      operationId: getTrilhaById
+        - course
+      summary: Acha uma course pelo ID
+      description: Retorna uma unica course
+      operationId: getCourseById
       parameters:
-        - name: trilhaId
+        - name: courseId
           in: path
-          description: ID da trilha que deseja de retorno
+          description: ID da course que deseja de retorno
           required: true
           schema:
             type: string
@@ -85,39 +85,39 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trilha'
+                $ref: '#/components/schemas/Course'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Trilha'
+                $ref: '#/components/schemas/Course'
         '400':
           description: Invalid ID supplied
         '404':
           description: Pet not found
     put:
       tags:
-        - trilha
-      summary: Atualiza uma trilha existente
-      description: Atualiza uma trilha existente pelo ID
-      operationId: updateTrilha
+        - course
+      summary: Atualiza uma course existente
+      description: Atualiza uma course existente pelo ID
+      operationId: updateCourse
       parameters:
-        - name: trilhaId
+        - name: courseId
           in: path
-          description: ID da trilha que deseja de retorno
+          description: ID da course que deseja de retorno
           required: true
           schema:
             type: string
       requestBody:
-        description: Atualiza uma trilha especifica.
+        description: Atualiza uma course especifica.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Trilha'
+              $ref: '#/components/schemas/Course'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Trilha'
+              $ref: '#/components/schemas/Course'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Trilha'
+              $ref: '#/components/schemas/Course'
         required: true
       responses:
         '200':
@@ -125,36 +125,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trilha'
+                $ref: '#/components/schemas/Course'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Trilha'
+                $ref: '#/components/schemas/Course'
         '400':
           description: Invalid ID
         '404':
-          description: Trilha not found
+          description: Course not found
         '405':
           description: Validation error
     delete:
       tags:
-        - trilha
-      summary: Remove uma trilha
-      description: Remove uma trilha
-      operationId: deleteTrilha
+        - course
+      summary: Remove uma course
+      description: Remove uma course
+      operationId: deleteCourse
       parameters:
-        - name: trilhaId
+        - name: courseId
           in: path
-          description: ID da trilha que deseja remover
+          description: ID da course que deseja remover
           required: true
           schema:
             type: string
       responses:
         400:
-          description: Invalid trilha ID
+          description: Invalid course ID
 
 components:
   schemas:
-    Trilha:
+    Course:
       required:
         - title
         - description
