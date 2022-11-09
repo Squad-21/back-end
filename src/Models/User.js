@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
@@ -18,37 +18,39 @@ const UserSchema = new Schema({
     unique: true,
     lowercase: true,
     validate: {
-        validator: v => v.indexOf('@') != -1,
-        message: props => `${props.value} não é um e-mail válido`
-    }
+      validator: (v) => v.indexOf('@') != -1,
+      message: (props) => `${props.value} não é um e-mail válido`,
+    },
   },
   notions: {
-    type: [{
-      notionID: {
-        type: ObjectId,
-        immutable: true,
+    type: [
+      {
+        notionID: {
+          type: ObjectId,
+          immutable: true,
+        },
+        trilhaID: {
+          type: ObjectId,
+          immutable: true,
+        },
+        modulo: {
+          type: Number,
+          required: true,
+          immutable: true,
+        },
+        doneAt: {
+          type: Date,
+          default: () => Date.now(),
+          immutable: true,
+        },
       },
-      trilhaID: {
-        type: ObjectId,
-        immutable: true,
-      },
-      modulo: {
-        type: Number,
-        required: true,
-        immutable: true,
-      },
-      doneAt: {
-        type: Date,
-        default: () => Date.now(),
-        immutable: true
-      }
-    }],
-    default: []
+    ],
+    default: [],
   },
   password: {
     type: String,
     required: true,
-    select: false
+    select: false,
   },
   admin: {
     type: Boolean,
@@ -58,15 +60,15 @@ const UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: () => Date.now(),
-    immutable: true
-  }
+    immutable: true,
+  },
 });
 
-UserSchema.pre('save', async function(next) {
-  const hash = await bcrypt.hash(this.password, 10)
+UserSchema.pre('save', async function (next) {
+  const hash = await bcrypt.hash(this.password, 10);
 
-  this.password = hash
-})
+  this.password = hash;
+});
 
 const UserModel = mongoose.model('users', UserSchema);
 

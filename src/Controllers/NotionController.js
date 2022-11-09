@@ -81,47 +81,44 @@ class NotionController {
     const userID = req.headers.user;
 
     try {
-      let notion = await NotionModel.findById(id)
-      const notionAlreadyHasLike = notion.likes?.find(like => like.id == userID)
+      let notion = await NotionModel.findById(id);
+      const notionAlreadyHasLike = notion.likes?.find((like) => like.id == userID);
 
-      if(notion) {
-        
-        if(!notionAlreadyHasLike) {
-          notion.unlikes = notion.unlikes.filter(unlike =>  unlike.id != userID)
+      if (notion) {
+        if (!notionAlreadyHasLike) {
+          notion.unlikes = notion.unlikes.filter((unlike) => unlike.id != userID);
 
           notion.likes.push({
-            id: userID
-          })
+            id: userID,
+          });
 
           await NotionModel.findByIdAndUpdate(id, notion);
-          
+
           return res.status(201).json({
             message: `Curtida confirmada`,
-            likes: notion.likes
-          })
+            likes: notion.likes,
+          });
         }
 
-      notion.likes = notion.likes.filter(like =>  like.id != userID)
+        notion.likes = notion.likes.filter((like) => like.id != userID);
 
-      await NotionModel.findByIdAndUpdate(id, notion);
+        await NotionModel.findByIdAndUpdate(id, notion);
 
-      return res.status(201).json({
-        message: `Curtida removida`,
-        likes: notion.likes
-      })
-
+        return res.status(201).json({
+          message: `Curtida removida`,
+          likes: notion.likes,
+        });
       }
 
       return res.status(404).json({
-          message: `Notion não existe`
-      })
-
+        message: `Notion não existe`,
+      });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-          message: `Erro ao dar like`,
-          error: e.message
-      })
+        message: `Erro ao dar like`,
+        error: e.message,
+      });
     }
   }
 
@@ -130,47 +127,44 @@ class NotionController {
     const userID = req.headers.user;
 
     try {
-      let notion = await NotionModel.findById(id)
-      const notionAlreadyHasUnlike = notion.unlikes?.find(unlike => unlike.id == userID)
+      let notion = await NotionModel.findById(id);
+      const notionAlreadyHasUnlike = notion.unlikes?.find((unlike) => unlike.id == userID);
 
-      if(notion) {
-
-        if(!notionAlreadyHasUnlike) {
-          notion.likes = notion.likes.filter(like =>  like.id != userID)
+      if (notion) {
+        if (!notionAlreadyHasUnlike) {
+          notion.likes = notion.likes.filter((like) => like.id != userID);
 
           notion.unlikes.push({
-            id: userID
-          })
+            id: userID,
+          });
 
           await NotionModel.findByIdAndUpdate(id, notion);
-          
+
           return res.status(201).json({
             message: `Descurtida confirmada`,
-            unlikes: notion.unlikes
-          })
+            unlikes: notion.unlikes,
+          });
         }
 
-      notion.unlikes = notion.unlikes.filter(unlike =>  unlike.id != userID)
+        notion.unlikes = notion.unlikes.filter((unlike) => unlike.id != userID);
 
-      await NotionModel.findByIdAndUpdate(id, notion);
+        await NotionModel.findByIdAndUpdate(id, notion);
 
-      return res.status(201).json({
-        message: `Descurtida removida`,
-        unlikes: notion.unlikes
-      })
-
+        return res.status(201).json({
+          message: `Descurtida removida`,
+          unlikes: notion.unlikes,
+        });
       }
 
       return res.status(404).json({
-          message: `Notion não existe`
-      })
-
+        message: `Notion não existe`,
+      });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-          message: `Erro ao descurtir notion`,
-          error: e.message
-      })
+        message: `Erro ao descurtir notion`,
+        error: e.message,
+      });
     }
   }
 
@@ -178,30 +172,28 @@ class NotionController {
     const { id } = req.params;
     const userID = req.headers.user;
 
-    req.body.author = userID
-    req.body.notionID = id
+    req.body.author = userID;
+    req.body.notionID = id;
 
     try {
       const notion = await NotionModel.findById(id);
 
-      if(!notion) {
+      if (!notion) {
         return res.status(404).json({
-          message: `Notion não existe`
-        })
+          message: `Notion não existe`,
+        });
       }
 
-     const newComment = await CommentModel.create(req.body);
+      const newComment = await CommentModel.create(req.body);
 
-     return res.status(201).json(newComment)
-
-    } catch(e) {
+      return res.status(201).json(newComment);
+    } catch (e) {
       console.log(e);
       return res.status(500).json({
-          message: `Erro ao comentar notion`,
-          error: e.message
-      })
+        message: `Erro ao comentar notion`,
+        error: e.message,
+      });
     }
-
   }
 
   async indexComment(req, res) {
@@ -214,7 +206,6 @@ class NotionController {
     } catch (e) {
       return res.status(500).json({ message: 'Erro ao recuperar comentários' });
     }
-    
   }
 
   async deleteComment(req, res) {
@@ -240,43 +231,43 @@ class NotionController {
     try {
       const notion = await NotionModel.findById(id);
 
-      if(!notion) return res.status(404).json({
-          message: 'Notion não existe'
+      if (!notion)
+        return res.status(404).json({
+          message: 'Notion não existe',
         });
 
-      let user = await UserModel.findById(userID)
-      const notionAlreadyHasBeenDone = user.notions.find(notion => notion.notionID == id)
+      let user = await UserModel.findById(userID);
+      const notionAlreadyHasBeenDone = user.notions.find((notion) => notion.notionID == id);
 
-      if(!user) return res.status(404).json({
-        message: 'Usuário não existe'
-      });
+      if (!user)
+        return res.status(404).json({
+          message: 'Usuário não existe',
+        });
 
-      if(notionAlreadyHasBeenDone) return res.status(401).json({
-        message: 'Notion já completa'
-      });
+      if (notionAlreadyHasBeenDone)
+        return res.status(401).json({
+          message: 'Notion já completa',
+        });
 
       user.notions.push({
         notionID: id,
         trilhaID: notion.trilha,
         modulo: notion.modulo,
-        doneAt: () => Date.now()
-      })
+        doneAt: () => Date.now(),
+      });
 
-      const userUpdated = await UserModel.findByIdAndUpdate(userID, user)
+      const userUpdated = await UserModel.findByIdAndUpdate(userID, user);
 
       return res.status(201).json(userUpdated);
-      
-    } catch(e) {
+    } catch (e) {
       return res.status(500).json({
         message: 'Falha ao marcar notion como completa',
-        error: e 
+        error: e,
       });
     }
-
   }
 }
 
 module.exports = new NotionController();
-
 
 /*eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNmFiOTljYjhkYjgwOTA4ZGE1OWJmYSIsImlhdCI6MTY2NzkzODcxNywiZXhwIjoxNjY4MDI1MTE3fQ.jeCm6GEUdimXMG4jOBj8Cw-SbfaCA4OuqQMb0QJ4GhA*/
