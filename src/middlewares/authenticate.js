@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
 
   try {
     if (!authHeader) {
-      return res.status(401).json({
+      return res.status(403).json({
         message: 'Não autorizado',
       });
     }
@@ -16,14 +16,14 @@ module.exports = async (req, res, next) => {
     const [schema, token] = parts;
 
     if (parts.length != 2 || schema.indexOf('Bearer') != 0) {
-      return res.status(401).json({
+      return res.status(403).json({
         message: 'Token inválido',
       });
     }
 
     jwt.verify(token, authConfig.secret, async (error, decoded) => {
       if (error) {
-        return res.status(401).json({
+        return res.status(403).json({
           message: 'Erro ao autenticar',
         });
       }
@@ -31,7 +31,7 @@ module.exports = async (req, res, next) => {
       const user = await UserModel.findById(decoded.id);
 
       if (!user.admin) {
-        return res.status(401).json({
+        return res.status(403).json({
           message: 'Não autorizado',
         });
       }
