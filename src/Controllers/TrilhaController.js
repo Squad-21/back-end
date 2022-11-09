@@ -31,8 +31,8 @@ class TrilhaController {
 
     try {
       let trilha = await TrilhaModel.findById(id);
-      const relatedContents = await RelatedContentModel.find({ trilhas: { $in: id}})
-      const notions = await NotionModel.find({trilha: id})
+      const relatedContents = await RelatedContentModel.find({ trilhas: { $in: id } });
+      const notions = await NotionModel.find({ trilha: id });
 
       if (!trilha) {
         return res.status(404).json({ message: 'Trilha não existe' });
@@ -41,7 +41,7 @@ class TrilhaController {
       return res.status(200).json({
         trilha: trilha,
         notions: notions,
-        related: relatedContents
+        related: relatedContents,
       });
     } catch (e) {
       console.log(e);

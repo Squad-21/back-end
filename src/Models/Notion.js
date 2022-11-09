@@ -34,26 +34,30 @@ const NotionSchema = new Schema({
     type: String,
     required: true,
   },
-  likes:[{
-    id: {
-      type: ObjectId,
-      ref: 'users'
+  likes: [
+    {
+      id: {
+        type: ObjectId,
+        ref: 'users',
+      },
+      date: {
+        type: Date,
+        default: () => Date.now(),
+      },
     },
-    date: {
-      type: Date,
-      default: () => Date.now()
-    }
-  }],
-  unlikes:[{
-    id: {
-      type: ObjectId,
-      ref: 'users'
+  ],
+  unlikes: [
+    {
+      id: {
+        type: ObjectId,
+        ref: 'users',
+      },
+      date: {
+        type: Date,
+        default: () => Date.now(),
+      },
     },
-    date: {
-      type: Date,
-      default: () => Date.now()
-    }
-  }],
+  ],
   createdAt: {
     type: Date,
     default: () => Date.now(),

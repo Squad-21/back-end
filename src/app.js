@@ -4,10 +4,10 @@ const cors = require('cors');
 const app = express();
 const trilhasRouter = require('./routes/trilhas');
 const notionRouter = require('./routes/notions');
-const authRouter = require('./routes/users')
+const authRouter = require('./routes/users');
 const healthRouter = require('./routes/health');
 const apidocsRouter = require('./routes/apidocs');
-const relatedRouter = require('./routes/relatedContent')
+const relatedRouter = require('./routes/relatedContent');
 
 app.use(express.json());
 app.use(cors());
