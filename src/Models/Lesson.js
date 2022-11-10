@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const NotionSchema = new Schema({
-  trilha: {
+const LessonSchema = new Schema({
+  course: {
     type: ObjectId,
-    ref: 'trilhas',
+    ref: 'courses',
     required: true,
   },
-  modulo: {
+  module: {
     type: Number,
     required: true,
   },
@@ -44,7 +44,7 @@ const NotionSchema = new Schema({
         },
       },
     ],
-    default: []
+    default: [],
   },
   unlikes: {
     type: [
@@ -59,7 +59,7 @@ const NotionSchema = new Schema({
         },
       },
     ],
-    default: []
+    default: [],
   },
   createdAt: {
     type: Date,
@@ -72,6 +72,6 @@ const NotionSchema = new Schema({
   },
 });
 
-const NotionModel = mongoose.model('notions', NotionSchema);
+const LessonModel = mongoose.model('lessons', LessonSchema);
 
-module.exports = NotionModel;
+module.exports = LessonModel;

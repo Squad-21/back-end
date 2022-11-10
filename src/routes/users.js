@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../Controllers/UserController');
-const authMiddleware = require('../middlewares/authenticate')
+const authMiddleware = require('../middlewares/authenticate');
 
 // Criar novo usuário
 router.post('/register', UserController.register);
@@ -12,7 +12,7 @@ router.get('/users', authMiddleware, UserController.index);
 // Retornar dados do usuário
 router.get('/:id', UserController.show);
 
-// Deletar usuário
+// Remover usuário
 router.delete('/:id', authMiddleware, UserController.delete);
 
 // Atualizar dados de um usuário

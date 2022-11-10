@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const TrilhaSchema = new Schema({
+const CourseSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -28,7 +28,7 @@ const TrilhaSchema = new Schema({
         },
       },
     ],
-    default: []
+    default: [],
   },
   createdAt: {
     type: Date,
@@ -41,6 +41,6 @@ const TrilhaSchema = new Schema({
   },
 });
 
-const TrilhaModel = mongoose.model('trilhas', TrilhaSchema);
+const CourseModel = mongoose.model('courses', CourseSchema);
 
-module.exports = TrilhaModel;
+module.exports = CourseModel;

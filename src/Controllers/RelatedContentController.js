@@ -9,7 +9,7 @@ class RelatedContentController {
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Erro ao criar conteúdo',
+        message: 'Erro ao criar conteúdo.',
         error: e.message,
       });
     }
@@ -23,12 +23,12 @@ class RelatedContentController {
     try {
       await RelatedContentModel.findByIdAndUpdate(id, req.body);
 
-      return res.status(200).json({ message: 'Conteúdo relacionado atualizado' });
+      return res.status(200).json({ message: 'Conteúdo relacionado atualizado.' });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
-        message: 'Falha ao atualizar conteúdo relacionado',
-        error: e.message
+        message: 'Erro ao atualizar conteúdo relacionado.',
+        error: e.message,
       });
     }
   }
@@ -38,13 +38,13 @@ class RelatedContentController {
     try {
       const deleted = await RelatedContentModel.findByIdAndDelete(id);
 
-      if (!deleted) return res.status(404).json({ message: 'Conteúdo relacionado não existe' });
+      if (!deleted) return res.status(404).json({ message: 'Conteúdo relacionado não existe.' });
 
-      return res.status(200).json({ message: `Conteúdo relacionado ${id} deletado com sucesso` });
+      return res.status(200).json({ message: `Conteúdo relacionado "${id}" removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
-        message: 'Falha ao deletar conteúdo relacionado',
-        error: e.message
+        message: 'Erro ao remover conteúdo relacionado.',
+        error: e.message,
       });
     }
   }

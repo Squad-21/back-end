@@ -8,12 +8,12 @@ const startDB = async () => {
     {},
     (error) => {
       if (error) {
-        console.log('Falha ao conectar no mongoDB');
+        console.log('Falha ao conectar com o MongoDB.');
         console.log('Erro:', error);
         return;
       }
 
-      console.log('Conectado ao mongoDB');
+      console.log('Conectado ao MongoDB.');
     }
   );
 };

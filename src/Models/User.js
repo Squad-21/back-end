@@ -16,31 +16,31 @@ const UserSchema = new Schema({
     lowercase: true,
     validate: {
       validator: (v) => v.indexOf('@') != -1,
-      message: (props) => `${props.value} não é um e-mail válido`,
+      message: (props) => `${props.value} não é um e-mail válido.`,
     },
   },
   avatar: {
     public_id: {
       type: String,
-      required: true
+      required: true,
     },
     url: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  notions: {
+  lessons: {
     type: [
       {
-        notionID: {
+        lessonID: {
           type: ObjectId,
           immutable: true,
         },
-        trilhaID: {
+        courseID: {
           type: ObjectId,
           immutable: true,
         },
-        modulo: {
+        module: {
           type: Number,
           required: true,
           immutable: true,
