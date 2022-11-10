@@ -4,34 +4,35 @@ const LessonController = require('../Controllers/LessonController');
 const authMiddleware = require('../middlewares/authenticate');
 const loginMiddleware = require('../middlewares/login');
 
-// Retornar os lessons de uma course
+// Retornar os lessons de uma course  - TODO
 router.get('/:id', LessonController.index);
 
-// Dá like numa lesson
+// Dá like numa lesson  - TODO
 router.post('/:id/like', loginMiddleware, LessonController.like);
 
-// Dá unlike numa lesson
+// Dá unlike numa lesson  - TODO
 router.post('/:id/unlike', loginMiddleware, LessonController.unlike);
 
-// Comenta em uma lesson
+// Comentar em uma lesson- OK
 router.post('/:id/comment', loginMiddleware, LessonController.comment);
 
-// Retornar comentários de uma lesson
+// Retornar comentários de uma lesson - OK
 router.get('/:id/comment', loginMiddleware, LessonController.indexComment);
 
-// Deletar comentário de uma lesson
+// Deletar comentário de uma lesson - TODO
 router.delete('/:id/comment', authMiddleware, LessonController.deleteComment);
 
-// Deletar comentário de uma lesson
+// Remover comentário de uma lesson - TODO
 router.post('/:id/done', loginMiddleware, LessonController.markAsDone);
 
-// Adicionar nova lesson
+// Adicionar nova lesson - OK
 router.post('/', authMiddleware, LessonController.store);
 
-// Atualizar uma lesson específica
+// Atualizar uma lesson específica - NOT OK
+// ESTÁ ATUALIZANDO NO DATABASE MAS ESTÁ COM A MENSAGEM DE RETORNO INCORRETA ( DEVERIA RETORNAR O OBJETO DEPOIS DE MODIFICADO OU MENSAGEM DE SUCESSO )
 router.put('/:id', authMiddleware, LessonController.update);
 
-// Deletar uma lesson específica
+// Deletar uma lesson específica - OK
 router.delete('/:id', authMiddleware, LessonController.delete);
 
 module.exports = router;
