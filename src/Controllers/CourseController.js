@@ -61,9 +61,9 @@ class CourseController {
     req.body.updatedAt = Date.now();
 
     try {
-      await CourseModel.findByIdAndUpdate(id, req.body);
+      const newCourse = await CourseModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
 
-      return res.status(200).json({ message: 'Curso atualizado.' });
+      return res.status(200).json(newCourse);
     } catch (e) {
       console.log(e);
       return res.status(500).json({

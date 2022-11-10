@@ -77,9 +77,9 @@ class UserController {
       const hash = await bcrypt.hash(req.body.password, 10);
       req.body.password = hash;
 
-      await UserModel.findByIdAndUpdate(id, req.body);
+      const newUser = await UserModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
 
-      return res.status(200).json({ message: 'Dados do usuário atualizados.' });
+      return res.status(200).json(newUser);
     } catch (e) {
       console.log(e);
       return res.status(500).json({

@@ -14,9 +14,9 @@ class ModuleController {
       course.modules.push(req.body)
       course.updatedAt = Date.now();
 
-      const newCourse = await CourseModel.findByIdAndUpdate(id, course);
+      const newCourse = await CourseModel.findByIdAndUpdate(id, course, { returnDocument: 'after' });
 
-      return res.status(201).json(course);
+      return res.status(201).json(newCourse);
     } catch (e) {
       console.log(e);
       return res.status(500).json({
@@ -39,9 +39,9 @@ class ModuleController {
         course.modules[moduleIndex].description = description
         course.updatedAt = Date.now();
   
-        const newCourse = await CourseModel.findByIdAndUpdate(id, course);
+        const newCourse = await CourseModel.findByIdAndUpdate(id, course, { returnDocument: 'after' });
   
-        return res.status(200).json(course);
+        return res.status(200).json(newCourse);
       } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -60,9 +60,9 @@ class ModuleController {
         course.modules = course.modules.filter(module => module.code != code)
         course.updatedAt = Date.now();
   
-        const newCourse = await CourseModel.findByIdAndUpdate(id, course);
+        const newCourse = await CourseModel.findByIdAndUpdate(id, course, { returnDocument: 'after' });
   
-        return res.status(200).json(course);
+        return res.status(200).json(newCourse);
       } catch (e) {
         console.log(e);
         return res.status(500).json({
