@@ -21,12 +21,10 @@ const UserSchema = new Schema({
   },
   avatar: {
     public_id: {
-      type: String,
-      required: true,
+      type: String
     },
     url: {
-      type: String,
-      required: true,
+      type: String
     },
   },
   lessons: {

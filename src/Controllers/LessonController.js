@@ -54,7 +54,8 @@ class LessonController {
 
       if (!course || !module) return res.status(404).json({ message: `${!course ? 'Curso' : 'Módulo'} não existe.` });
 
-      const newLesson = await LessonModel.findByIdAndUpdate(id, req.body);
+      const lesson = await LessonModel.findByIdAndUpdate(id, req.body);
+      const newLesson = await LessonModel.findById(id)
 
       return res.status(200).json(newLesson);
     } catch (e) {

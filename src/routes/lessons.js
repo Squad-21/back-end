@@ -28,8 +28,7 @@ router.post('/:id/done', loginMiddleware, LessonController.markAsDone);
 // Adicionar nova lesson - OK
 router.post('/', authMiddleware, LessonController.store);
 
-// Atualizar uma lesson específica - NOT OK
-// ESTÁ ATUALIZANDO NO DATABASE MAS ESTÁ COM A MENSAGEM DE RETORNO INCORRETA ( DEVERIA RETORNAR O OBJETO DEPOIS DE MODIFICADO OU MENSAGEM DE SUCESSO )
+// Atualizar uma lesson específica - OK
 router.put('/:id', authMiddleware, LessonController.update);
 
 // Deletar uma lesson específica - OK
