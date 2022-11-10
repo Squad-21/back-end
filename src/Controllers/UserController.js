@@ -96,7 +96,7 @@ class UserController {
 
       if (!deleted) return res.status(404).json({ message: 'Usuário não existe.' });
 
-      return res.status(200).json({ message: `Usuário "${deleted.name}" removido com sucesso.` });
+      return res.status(200).json({ message: `Usuário ${deleted.name} removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao deletar usuário',

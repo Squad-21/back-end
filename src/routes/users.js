@@ -6,19 +6,19 @@ const authMiddleware = require('../middlewares/authenticate');
 // Criar novo usuário
 router.post('/register', UserController.register);
 
+// Autenticar usuário
+router.post('/authenticate', UserController.authenticate);
+
 // Retornar todos os usuários
 router.get('/users', authMiddleware, UserController.index);
 
-// Retornar dados do usuário
+// Retornar dados de um usuário
 router.get('/:id', UserController.show);
 
-// Remover usuário
+// Remover um usuário
 router.delete('/:id', authMiddleware, UserController.delete);
 
 // Atualizar dados de um usuário
 router.put('/:id', authMiddleware, UserController.update);
-
-// Autenticar usuário
-router.post('/authenticate', UserController.authenticate);
 
 module.exports = router;

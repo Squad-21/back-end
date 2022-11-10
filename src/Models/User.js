@@ -19,12 +19,15 @@ const UserSchema = new Schema({
       message: (props) => `${props.value} não é um e-mail válido.`,
     },
   },
+  //TODO: ROTA PATCH MUDAR AVATAR
   avatar: {
     public_id: {
-      type: String
+      type: String,
+      //TODO: default: DEFAULT AVATAR
     },
     url: {
-      type: String
+      type: String,
+      //TODO: default: DEFAULT AVATAR URL
     },
   },
   lessons: {
@@ -59,7 +62,7 @@ const UserSchema = new Schema({
   },
   admin: {
     type: Boolean,
-    default: false,
+    default: true,
     required: true,
   },
   createdAt: {

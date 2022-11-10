@@ -30,6 +30,11 @@ module.exports = async (req, res, next) => {
 
       const user = await UserModel.findById(decoded.id);
 
+      if (!user) {
+        return res.status(404).json({
+          message: 'Usário não encontrado.',
+        });
+      }
       if (!user.admin) {
         return res.status(403).json({
           message: 'Não autorizado.',
