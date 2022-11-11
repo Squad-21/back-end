@@ -73,7 +73,7 @@ class LessonController {
 
       if (!lessonDeleted) return res.status(404).json({ message: 'Aula não existe.' });
 
-      return res.status(200).json({ message: `Aula "${id}" removida com sucesso.` });
+      return res.status(200).json({ message: `Aula ${id} removida com sucesso.` });
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao remover aula.',
@@ -222,7 +222,7 @@ class LessonController {
 
       if (!commentDeleted) return res.status(404).json({ message: 'Comentário não existe.' });
 
-      return res.status(200).json({ message: `Comentário "${id}" removido com sucesso.` });
+      return res.status(200).json({ message: `Comentário ${id} removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao remover comentário.',

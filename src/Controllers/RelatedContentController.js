@@ -40,7 +40,7 @@ class RelatedContentController {
 
       if (!deleted) return res.status(404).json({ message: 'Conteúdo relacionado não existe.' });
 
-      return res.status(200).json({ message: `Conteúdo relacionado "${id}" removido com sucesso.` });
+      return res.status(200).json({ message: `Conteúdo relacionado ${id} removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao remover conteúdo relacionado.',

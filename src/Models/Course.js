@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+
+//TODO: CAMPO DE IMAGEM/LOGO DO CURSO
 
 const CourseSchema = new Schema({
   title: {

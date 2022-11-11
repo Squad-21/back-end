@@ -80,7 +80,7 @@ class CourseController {
 
       if (!courseDeleted) return res.status(404).json({ message: 'Curso não existe.' });
 
-      return res.status(200).json({ message: `Curso "${id}" removido com sucesso.` });
+      return res.status(200).json({ message: `Curso ${id} removido com sucesso.` });
     } catch (e) {
       return res.status(500).json({
         message: 'Erro ao remover curso.',
@@ -88,7 +88,6 @@ class CourseController {
       });
     }
   }
-
 }
 
 module.exports = new CourseController();
