@@ -1,11 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//TODO: CAMPO DE IMAGEM/LOGO DO CURSO
-
 const CourseSchema = new Schema({
   title: {
     type: String,
+    required: true,
+  },
+  image: {
+    type: {
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
+    },
+    default: {
+      public_id: 'default_course_u489iq',
+      url: 'https://res.cloudinary.com/dnh07moob/image/upload/v1668204845/curso/default_course_u489iq.jpg',
+    },
     required: true,
   },
   description: {

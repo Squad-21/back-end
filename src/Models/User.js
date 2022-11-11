@@ -21,14 +21,19 @@ const UserSchema = new Schema({
   },
   //TODO: ROTA PATCH MUDAR AVATAR
   avatar: {
-    public_id: {
-      type: String,
-      //TODO: default: DEFAULT AVATAR
+    type: {
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
-    url: {
-      type: String,
-      //TODO: default: DEFAULT AVATAR URL
+    default: {
+      public_id: 'default_wir0sx',
+      url: 'https://res.cloudinary.com/dnh07moob/image/upload/v1668204592/avatar/default_wir0sx.png'
     },
+    required: true
   },
   lessons: {
     type: [
