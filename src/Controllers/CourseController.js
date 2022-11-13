@@ -16,10 +16,13 @@ const uploadImage = async (image = File) => {
 class CourseController {
   async store(req, res) {
     try {
-      console.log(req.body);
+
       if(req.body.image) {
-        console.log(req.body.image);
-        req.body.image = await uploadImage(req.body.image[0]);
+        const imageUploaded = await uploadImage(req.body.image);
+        req.body.image = {
+          public_id: imageUploaded.public_id,
+          url: imageUploaded.url
+        }
       }
       const newCourse = await CourseModel.create(req.body);
 

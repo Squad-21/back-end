@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const bodyParser = require('body-parser')
 const app = express();
 const coursesRouter = require('./routes/courses');
 const lessonRouter = require('./routes/lessons');
@@ -16,6 +16,8 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use('/courses', coursesRouter);
 app.use('/lessons', lessonRouter);
