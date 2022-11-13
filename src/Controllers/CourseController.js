@@ -80,6 +80,13 @@ class CourseController {
     req.body.updatedAt = Date.now();
 
     try {
+      if (req.body.image) {
+        const imageUploaded = await uploadImage(req.body.image);
+        req.body.image = {
+          public_id: imageUploaded.public_id,
+          url: imageUploaded.url
+        }
+      }
       const newCourse = await CourseModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
 
       return res.status(200).json(newCourse);
