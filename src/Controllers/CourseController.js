@@ -1,6 +1,7 @@
 const LessonModel = require('../Models/Lesson');
 const RelatedContentModel = require('../Models/RelatedContent');
 const CourseModel = require('../Models/Course');
+const cloudinary = require('../loaders/cloudinary');
 
 const uploadImage = async (image = File) => {
   const result = await cloudinary.uploader.upload(image, {
@@ -17,7 +18,7 @@ class CourseController {
   async store(req, res) {
     try {
 
-      if(req.body.image) {
+      if (req.body.image) {
         const imageUploaded = await uploadImage(req.body.image);
         req.body.image = {
           public_id: imageUploaded.public_id,
