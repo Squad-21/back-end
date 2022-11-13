@@ -4,13 +4,13 @@ const RelatedContentController = require('../Controllers/RelatedContentControlle
 const authMiddleware = require('../middlewares/authenticate');
 const loginMiddleware = require('../middlewares/login');
 
-// Criar um novo conteúdo relacionado
+// Adicionar um novo conteúdo relacionado - //TODO: EXEMPLO MELHOR DE POST NA DOCUMENTAÇÃO
 router.post('/', authMiddleware, RelatedContentController.store);
 
-// Deletar um conteúdo relacionado
+// Remover um conteúdo relacionado - OK
 router.delete('/:id', authMiddleware, RelatedContentController.delete);
 
-// Atualizar um conteúdo relacionado
+// Atualizar um conteúdo relacionado - OK
 router.put('/:id', authMiddleware, RelatedContentController.update);
 
 module.exports = router;
