@@ -1,11 +1,24 @@
 const LessonModel = require('../Models/Lesson');
 const RelatedContentModel = require('../Models/RelatedContent');
 const CourseModel = require('../Models/Course');
-const LessonController = require('./LessonController');
+
+const uploadImage = async (image = File) => {
+  const result = await cloudinary.uploader.upload(image, {
+    folder: 'curso',
+  });
+
+  return {
+    public_id: result.public_id,
+    url: result.secure_url,
+  };
+};
 
 class CourseController {
   async store(req, res) {
     try {
+      if(req.body.image) {
+        req.body.image = await uploadImage(req.body.image[0]);
+      }
       const newCourse = await CourseModel.create(req.body);
 
       return res.status(201).json(newCourse);
