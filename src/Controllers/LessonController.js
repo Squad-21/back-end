@@ -203,7 +203,7 @@ class LessonController {
     const { id } = req.params;
 
     try {
-      const comments = await CommentModel.find({ lessonID: id });
+      const comments = await CommentModel.find({ lessonID: id }).populate('author');
 
       return res.status(200).json(comments);
     } catch (e) {
