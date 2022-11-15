@@ -76,8 +76,17 @@ class UserController {
     const { id } = req.params;
 
     try {
-      const hash = await bcrypt.hash(req.body.password, 10);
-      req.body.password = hash;
+      if (req.body.password) {
+        const hash = await bcrypt.hash(req.body.password, 10);
+        req.body.password = hash;
+      }
+      if (req.body.avatar) {
+        const imageUploaded = await uploadAvatar(req.body.avatar);
+        req.body.avatar = {
+          public_id: imageUploaded.public_id,
+          url: imageUploaded.url
+        }
+      }
 
       const newUser = await UserModel.findByIdAndUpdate(id, req.body, {
         runValidators: true,
