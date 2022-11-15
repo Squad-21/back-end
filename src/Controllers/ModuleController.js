@@ -14,11 +14,13 @@ class ModuleController {
         req.body.code = 1;
       }
 
-
       course.modules.push(req.body);
       course.updatedAt = Date.now();
 
-      const newCourse = await CourseModel.findByIdAndUpdate(id, course, { returnDocument: 'after' });
+      const newCourse = await CourseModel.findByIdAndUpdate(id, course, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(201).json(newCourse);
     } catch (e) {
@@ -43,7 +45,10 @@ class ModuleController {
       course.modules[moduleIndex].description = description;
       course.updatedAt = Date.now();
 
-      const newCourse = await CourseModel.findByIdAndUpdate(id, course, { returnDocument: 'after' });
+      const newCourse = await CourseModel.findByIdAndUpdate(id, course, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(200).json(newCourse);
     } catch (e) {
@@ -64,7 +69,10 @@ class ModuleController {
       course.modules = course.modules.filter((module) => module.code != code);
       course.updatedAt = Date.now();
 
-      const newCourse = await CourseModel.findByIdAndUpdate(id, course, { returnDocument: 'after' });
+      const newCourse = await CourseModel.findByIdAndUpdate(id, course, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(200).json(newCourse);
     } catch (e) {

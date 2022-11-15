@@ -26,7 +26,6 @@ const uploadAvatar = async (image = File) => {
 class UserController {
   async register(req, res) {
     try {
-
       const user = await UserModel.create(req.body);
 
       return res.status(201).json({
@@ -80,7 +79,10 @@ class UserController {
       const hash = await bcrypt.hash(req.body.password, 10);
       req.body.password = hash;
 
-      const newUser = await UserModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
+      const newUser = await UserModel.findByIdAndUpdate(id, req.body, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(200).json(newUser);
     } catch (e) {

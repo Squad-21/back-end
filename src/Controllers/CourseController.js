@@ -21,8 +21,8 @@ class CourseController {
         const imageUploaded = await uploadImage(req.body.image);
         req.body.image = {
           public_id: imageUploaded.public_id,
-          url: imageUploaded.url
-        }
+          url: imageUploaded.url,
+        };
       }
       const newCourse = await CourseModel.create(req.body);
 
@@ -83,10 +83,13 @@ class CourseController {
         const imageUploaded = await uploadImage(req.body.image);
         req.body.image = {
           public_id: imageUploaded.public_id,
-          url: imageUploaded.url
-        }
+          url: imageUploaded.url,
+        };
       }
-      const newCourse = await CourseModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
+      const newCourse = await CourseModel.findByIdAndUpdate(id, req.body, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(200).json(newCourse);
     } catch (e) {

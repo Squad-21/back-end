@@ -31,9 +31,9 @@ const UserSchema = new Schema({
     },
     default: {
       public_id: 'default_wir0sx',
-      url: 'https://res.cloudinary.com/dnh07moob/image/upload/v1668204592/avatar/default_wir0sx.png'
+      url: 'https://res.cloudinary.com/dnh07moob/image/upload/v1668204592/avatar/default_wir0sx.png',
     },
-    required: true
+    required: true,
   },
   lessons: {
     type: [

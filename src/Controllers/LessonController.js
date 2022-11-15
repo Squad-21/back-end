@@ -54,7 +54,10 @@ class LessonController {
 
       if (!course || !module) return res.status(404).json({ message: `${!course ? 'Curso' : 'Módulo'} não existe.` });
 
-      const newLesson = await LessonModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
+      const newLesson = await LessonModel.findByIdAndUpdate(id, req.body, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(200).json(newLesson);
     } catch (e) {
@@ -263,7 +266,10 @@ class LessonController {
         doneAt: () => Date.now(),
       });
 
-      const userUpdated = await UserModel.findByIdAndUpdate(userID, user, { returnDocument: 'after' });
+      const userUpdated = await UserModel.findByIdAndUpdate(userID, user, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(201).json(userUpdated);
     } catch (e) {

@@ -21,7 +21,10 @@ class RelatedContentController {
     req.body.updatedAt = Date.now();
 
     try {
-      const newRelated = await RelatedContentModel.findByIdAndUpdate(id, req.body, { returnDocument: 'after' });
+      const newRelated = await RelatedContentModel.findByIdAndUpdate(id, req.body, {
+        runValidators: true,
+        returnDocument: 'after',
+      });
 
       return res.status(200).json(newRelated);
     } catch (e) {
