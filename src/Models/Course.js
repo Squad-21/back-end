@@ -24,6 +24,7 @@ const CourseSchema = new Schema({
   description: {
     type: String,
     required: true,
+    maxLength: 280,
   },
   modules: {
     type: [
