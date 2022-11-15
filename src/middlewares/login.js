@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
+const authConfig = require('../config/auth.json');
 const UserModel = require('../Models/User');
-require('dotenv').config();
 
 module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    jwt.verify(token, process.env.AUTH_SECRET, async (error, decoded) => {
+    jwt.verify(token, authConfig.secret, async (error, decoded) => {
       if (error) {
         return res.status(401).json({
           message: 'Erro ao autenticar.',
