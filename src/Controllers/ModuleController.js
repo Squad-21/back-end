@@ -7,8 +7,13 @@ class ModuleController {
     try {
       let course = await CourseModel.findById(id);
 
-      let highestCode = Math.max(...course.modules.map((module) => module.code));
-      req.body.code = highestCode + 1;
+      if (course.modules.length) {
+        let highestCode = Math.max(...course.modules.map((module) => module.code));
+        req.body.code = highestCode + 1;
+      } else {
+        req.body.code = 1;
+      }
+
 
       course.modules.push(req.body);
       course.updatedAt = Date.now();

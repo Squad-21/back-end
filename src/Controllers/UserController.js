@@ -26,16 +26,12 @@ const uploadAvatar = async (image = File) => {
 class UserController {
   async register(req, res) {
     try {
-      //TODO: Testar registro com avatar
-      if(req.body.avatar) {
-        req.body.avatar = uploadAvatar(req.body.avatar);
-      }
-      
-      const User = await UserModel.create(req.body);
+
+      const user = await UserModel.create(req.body);
 
       return res.status(201).json({
-        User,
-        token: generateToken(User),
+        user,
+        token: generateToken(user),
       });
     } catch (e) {
       console.log(e);

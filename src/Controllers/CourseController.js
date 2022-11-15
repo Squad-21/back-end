@@ -17,7 +17,6 @@ const uploadImage = async (image = File) => {
 class CourseController {
   async store(req, res) {
     try {
-
       if (req.body.image) {
         const imageUploaded = await uploadImage(req.body.image);
         req.body.image = {
