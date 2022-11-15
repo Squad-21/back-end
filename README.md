@@ -1,6 +1,17 @@
-# Back-End
+# [Programa de Formação Season 4 do Grupo FCamara](https://digital.fcamara.com.br/programadeformacao 'Programa de Formação Season 4 do Grupo FCamara')
 
-## [Programa de Formação Season 4 do Grupo FCamara](https://digital.fcamara.com.br/programadeformacao 'Programa de Formação Season 4 do Grupo FCamara')
+## Back-End
+
+- [Node](https://nodejs.org/en/ "Node")
+- [Express](https://www.npmjs.com/package/express "Express")
+- [MongoDB](https://mongodb.com/ "MongoDB")
+- [Mongoose](https://www.npmjs.com/package/mongoose "Mongoose")
+- [Cors](https://www.npmjs.com/package/cors "Cors")
+- [JSON Web Tokens](https://www.npmjs.com/package/jsonwebtoken "JSON Web Tokens")
+- [Body-Parser](https://www.npmjs.com/package/body-parser "Body-Parser")
+- [Bcryptjs](https://www.npmjs.com/package/bcryptjs "Bcryptjs")
+- [Cloudinary](https://www.npmjs.com/package/cloudinary "Cloudinary")
+- [dotenv](https://www.npmjs.com/package/dotenv "dotenv")
 
 ### Contribuidores
 
