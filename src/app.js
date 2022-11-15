@@ -6,7 +6,6 @@ const coursesRouter = require('./routes/courses');
 const lessonRouter = require('./routes/lessons');
 const authRouter = require('./routes/users');
 const healthRouter = require('./routes/health');
-const apidocsRouter = require('./routes/apidocs');
 const relatedRouter = require('./routes/relatedContent');
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -23,6 +22,5 @@ app.use('/lessons', lessonRouter);
 app.use('/auth', authRouter);
 app.use('/related', relatedRouter);
 app.use('/health', healthRouter);
-app.use('/api-docs', apidocsRouter);
 
 module.exports = app;

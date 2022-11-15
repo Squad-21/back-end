@@ -1,0 +1,846 @@
+{
+  "info": {
+    "_postman_id": "f1e51147-67cf-40f8-b68c-2f5c76a4a03a",
+    "name": "Squad-21",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24237996"
+  },
+  "item": [
+    {
+      "name": "USERS - OK",
+      "item": [
+        {
+          "name": "01 - Adicionar um novo usuário",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Nome do Usuário\",\r\n    \"email\": \"meuemail@email.com\",\r\n    \"password\": \"SenhaSegura\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/register",
+              "host": ["{{url}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "02 - Autenticar usuário",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"meuemail@email.com\",\r\n    \"password\": \"SenhaSegura\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/authenticate",
+              "host": ["{{url}}"],
+              "path": ["auth", "authenticate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "03 - Retornar todos os usuários",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/users",
+              "host": ["{{url}}"],
+              "path": ["auth", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "04 - Retornar dados de um usuário",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/{{userId}}",
+              "host": ["{{url}}"],
+              "path": ["auth", "{{userId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "05 - Atualizar dados de um usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Novo Nome do Usuário\",\r\n    \"email\": \"meuNovoEmail@email.comm\",\r\n    \"password\": \"SenhaMaisSegura\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/{{userId}}",
+              "host": ["{{url}}"],
+              "path": ["auth", "{{userId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "06 - Remover um usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/{{userId}}",
+              "host": ["{{url}}"],
+              "path": ["auth", "{{userId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "COURSES - OK",
+      "item": [
+        {
+          "name": "01 - Retornar todos os cursos",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses/",
+              "host": ["{{url}}"],
+              "path": ["courses", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "02 - Retornar um curso específico",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses/{{courseId}}",
+              "host": ["{{url}}"],
+              "path": ["courses", "{{courseId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "03 - Adicionar um novo módulo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Manifesto Ágil\",\r\n    \"description\": \"Levando em consideração todas as características anteriormente debatidas, em 2001 dezessete pessoas se uniram e escreveram o manifesto ágil.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses/{{courseId}}/modules",
+              "host": ["{{url}}"],
+              "path": ["courses", "{{courseId}}", "modules"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "04 - Remover um módulo",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/courses/{{courseId}}/modules/4",
+              "host": ["{{url}}"],
+              "path": ["courses", "{{courseId}}", "modules", "4"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "05 - Atualizar um módulo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"O Manifesto Ágil\",\r\n    \"description\": \"Levando em consideração todas as características anteriormente debatidas, em 2001 dezessete pessoas se uniram e escreveram o manifesto ágil.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses/{{courseId}}/modules/4",
+              "host": ["{{url}}"],
+              "path": ["courses", "{{courseId}}", "modules", "4"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "06 - Adicionar um novo curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Metodologia Ágil\",\r\n    \"description\": \"Fundamentos iniciais da Metodologia Ágil\",\r\n    \"modules\": [\r\n        {\r\n            \"code\": 1,\r\n            \"title\": \"Introdução\",\r\n            \"description\": \"Seus primeiros passos para entender a Metodologia Ágil.\"            \r\n        },\r\n        {\r\n            \"code\": 2,\r\n            \"title\": \"Priorização\",\r\n            \"description\": \"Entenda por que é importante priorizar funcionalidades, realizando aquilo que agrega mais valor ao produto.\"            \r\n        },\r\n        {\r\n            \"code\": 3,\r\n            \"title\": \"Fluxo de Tarefas\",\r\n            \"description\": \"Como criar um fluxo de tarefas.\"            \r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses",
+              "host": ["{{url}}"],
+              "path": ["courses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "07 - Atualizar um curso específico",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Metodologia Ágil!\",\r\n    \"description\": \"Fundamentos iniciais da Metodologia Ágil\",\r\n    \"modules\": [\r\n        {\r\n            \"code\": 1,\r\n            \"title\": \"Introdução\",\r\n            \"description\": \"Seus primeiros passos para entender a Metodologia Ágil.\"            \r\n        },\r\n        {\r\n            \"code\": 2,\r\n            \"title\": \"Priorização\",\r\n            \"description\": \"Entenda por que é importante priorizar funcionalidades, realizando aquilo que agrega mais valor ao produto.\"            \r\n        },\r\n        {\r\n            \"code\": 3,\r\n            \"title\": \"Fluxo de Tarefas\",\r\n            \"description\": \"Como criar um fluxo de tarefas.\"            \r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses/{{courseId}}",
+              "host": ["{{url}}"],
+              "path": ["courses", "{{courseId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "08 - Remover um curso específico",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/courses/{{courseId}}",
+              "host": ["{{url}}"],
+              "path": ["courses", "{{courseId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "LESSONS - OK",
+      "item": [
+        {
+          "name": "01 - Retornar todas as aulas de um curso",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{courseId}}",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{courseId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "02 - Dar um 'like' em uma aula",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}/like",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}", "like"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "03 - Dar um 'unlike' em uma aula",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}/unlike",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}", "unlike"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "04 - Deixar um comentário em uma aula",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"content\":\"Aqui está o meu comentário.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}/comment",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}", "comment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "05 - Retorna todos os comentários de uma aula",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}/comment",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}", "comment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "06 - Remover um comentário de uma aula",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{commentId}}/comment",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{commentId}}", "comment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "07 - Marcar aula como completa",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}/done",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}", "done"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "08 - Adicionar uma nova aula",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"course\": \"{{courseId}}\",\r\n    \"module\": \"1\",\r\n    \"title\": \"Aula 1 do Curso {{courseId}}\",\r\n    \"type\": \"Artigo\",\r\n    \"author\": \"Bruno Brolesi\",\r\n    \"duration\": \"00:25:00\",\r\n    \"content\": \"Olá, tudo bem? Meu nome é Bruno, sou Trainee no grupo FCamara e após realizar o curso Fundamentos de Agilidade: seus primeiros passos para a transformação ágil disponível na Alura, irei falar um pouco sobre metodologia ágil. Quando estamos em uma equipe de desenvolvimento, desejamos que as etapas de um projeto sejam realizadas com qualidade e assim garantindo que a entrega gere satisfação ao nosso cliente. No mundo do desenvolvimento, existem algumas metodologias para a gestão das etapas do projeto, uma muito utilizada é a estilo cascata. Esse modelo consiste em etapas interdependentes, onde cada passo necessita que o anterior seja concluído para seu avanço. Na construção civil esse modelo pode ser analisado de forma nítida. Por exemplo, para realizar a construção de uma residência necessita-se do desenho da planta baixa, em seguida entra-se com o pedido de análise na prefeitura, a documentação é gerada e assim que aprovada a construção é iniciada. Você consegue perceber uma rigidez nesse processo? Cada etapa depende da anterior e caso seja necessária alguma mudança no projeto, é preciso que todas as etapas anteriores sejam refeitas. Quando a construção é iniciada, cada alicerce levantado dificulta ainda mais alterações no projeto inicial. Quando o desenvolvimento de software se iniciou, ele tomou como exemplo o desenvolvimento de projetos provenientes de outras áreas e implementou a metodologia de cascata para gestão das etapas do projeto. Entretanto, logo percebeu-se que esse modelo não era tão eficaz como nas demais áreas. Um grande problema é a volatilidade no desenvolvimento de software, onde tecnologias, regulamentações e ideias estão surgindo a todo momento, e limitar a capacidade de mudança durante o desenvolvimento começou a gerar uma insatisfação na entrega do produto. Com essa demanda em aberto, iniciou-se a idealização de um modelo mais resiliente e traçou-se três principais características.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons",
+              "host": ["{{url}}"],
+              "path": ["lessons"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "09 - Atualizar uma aula específica",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"course\": \"{{courseId}}\",\r\n    \"module\": \"1\",\r\n    \"title\": \"Aula 1 do Curso {{courseId}}!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "10 - Remover uma aula específica",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/lessons/{{lessonId}}",
+              "host": ["{{url}}"],
+              "path": ["lessons", "{{lessonId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RELATED CONTENT - OK",
+      "item": [
+        {
+          "name": "01 - Adicionar um novo conteúdo relacionado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"courses\":[],\r\n    \"title\":\"Conteúdo Relacionado 1\",\r\n    \"type\":\"Artigo\",\r\n    \"author\":\"Orange Juice\",\r\n    \"duration\":\"00:19:00\",\r\n    \"content\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et malesuada fames ac turpis egestas sed tempus urna. Vel risus commodo viverra maecenas accumsan lacus. Cras semper auctor neque vitae tempus quam pellentesque nec. Sed faucibus turpis in eu mi. Nulla malesuada pellentesque elit eget gravida cum sociis. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci. Dignissim convallis aenean et tortor at risus viverra adipiscing. Donec adipiscing tristique risus nec feugiat in. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Tristique senectus et netus et. Volutpat odio facilisis mauris sit amet. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Molestie at elementum eu facilisis. Tempor nec feugiat nisl pretium fusce id velit ut tortor. In cursus turpis massa tincidunt dui. Ac turpis egestas maecenas pharetra convallis posuere. Amet justo donec enim diam. Volutpat commodo sed egestas egestas fringilla phasellus. Cras tincidunt lobortis feugiat vivamus at. Vehicula ipsum a arcu cursus vitae congue. Pellentesque dignissim enim sit amet venenatis. Vitae auctor eu augue ut lectus arcu bibendum at varius. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Luctus venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Velit egestas dui id ornare. Montes nascetur ridiculus mus mauris vitae. Quis vel eros donec ac. Justo eget magna fermentum iaculis eu. Enim eu turpis egestas pretium aenean pharetra. A scelerisque purus semper eget duis at. Facilisis volutpat est velit egestas dui id. Metus aliquam eleifend mi in. Dictum varius duis at consectetur. Tortor condimentum lacinia quis vel eros donec ac odio tempor. Scelerisque mauris pellentesque pulvinar pellentesque. Id aliquet risus feugiat in ante metus. Accumsan in nisl nisi scelerisque eu. Et pharetra pharetra massa massa ultricies mi quis. Scelerisque eu ultrices vitae auctor eu augue ut lectus. Velit dignissim sodales ut eu sem. Enim neque volutpat ac tincidunt vitae. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Turpis in eu mi bibendum. Commodo ullamcorper a lacus vestibulum sed arcu non odio euismod. Nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus. Eget sit amet tellus cras adipiscing enim eu. Et molestie ac feugiat sed lectus vestibulum mattis. Nullam ac tortor vitae purus.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/related",
+              "host": ["{{url}}"],
+              "path": ["related"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "03 - Atualizar um conteúdo relacionado",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"courses\":[],\r\n    \"title\":\"Conteúdo Relacionado 1!\",\r\n    \"type\":\"Artigo\",\r\n    \"author\":\"Orange Juice\",\r\n    \"duration\":\"00:19:00\",\r\n    \"content\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et malesuada fames ac turpis egestas sed tempus urna. Vel risus commodo viverra maecenas accumsan lacus. Cras semper auctor neque vitae tempus quam pellentesque nec. Sed faucibus turpis in eu mi. Nulla malesuada pellentesque elit eget gravida cum sociis. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci. Dignissim convallis aenean et tortor at risus viverra adipiscing. Donec adipiscing tristique risus nec feugiat in. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Tristique senectus et netus et. Volutpat odio facilisis mauris sit amet. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Molestie at elementum eu facilisis. Tempor nec feugiat nisl pretium fusce id velit ut tortor. In cursus turpis massa tincidunt dui. Ac turpis egestas maecenas pharetra convallis posuere. Amet justo donec enim diam. Volutpat commodo sed egestas egestas fringilla phasellus. Cras tincidunt lobortis feugiat vivamus at. Vehicula ipsum a arcu cursus vitae congue. Pellentesque dignissim enim sit amet venenatis. Vitae auctor eu augue ut lectus arcu bibendum at varius. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Luctus venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Velit egestas dui id ornare. Montes nascetur ridiculus mus mauris vitae. Quis vel eros donec ac. Justo eget magna fermentum iaculis eu. Enim eu turpis egestas pretium aenean pharetra. A scelerisque purus semper eget duis at. Facilisis volutpat est velit egestas dui id. Metus aliquam eleifend mi in. Dictum varius duis at consectetur. Tortor condimentum lacinia quis vel eros donec ac odio tempor. Scelerisque mauris pellentesque pulvinar pellentesque. Id aliquet risus feugiat in ante metus. Accumsan in nisl nisi scelerisque eu. Et pharetra pharetra massa massa ultricies mi quis. Scelerisque eu ultrices vitae auctor eu augue ut lectus. Velit dignissim sodales ut eu sem. Enim neque volutpat ac tincidunt vitae. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Turpis in eu mi bibendum. Commodo ullamcorper a lacus vestibulum sed arcu non odio euismod. Nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus. Eget sit amet tellus cras adipiscing enim eu. Et molestie ac feugiat sed lectus vestibulum mattis. Nullam ac tortor vitae purus.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/related/{{relatedContentId}}",
+              "host": ["{{url}}"],
+              "path": ["related", "{{relatedContentId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "02 - Remover um conteúdo relacionado",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearertoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"courses\":[],\r\n    \"title\":\"Conteúdo Relacionado 1\",\r\n    \"type\":\"Artigo\",\r\n    \"author\":\"Marcos Gruah\",\r\n    \"duration\":\"00:19:00\",\r\n    \"content\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et malesuada fames ac turpis egestas sed tempus urna. Vel risus commodo viverra maecenas accumsan lacus. Cras semper auctor neque vitae tempus quam pellentesque nec. Sed faucibus turpis in eu mi. Nulla malesuada pellentesque elit eget gravida cum sociis. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci. Dignissim convallis aenean et tortor at risus viverra adipiscing. Donec adipiscing tristique risus nec feugiat in. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Tristique senectus et netus et. Volutpat odio facilisis mauris sit amet. Tempor commodo ullamcorper a lacus vestibulum sed arcu. Molestie at elementum eu facilisis. Tempor nec feugiat nisl pretium fusce id velit ut tortor. In cursus turpis massa tincidunt dui. Ac turpis egestas maecenas pharetra convallis posuere. Amet justo donec enim diam. Volutpat commodo sed egestas egestas fringilla phasellus. Cras tincidunt lobortis feugiat vivamus at. Vehicula ipsum a arcu cursus vitae congue. Pellentesque dignissim enim sit amet venenatis. Vitae auctor eu augue ut lectus arcu bibendum at varius. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Luctus venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Velit egestas dui id ornare. Montes nascetur ridiculus mus mauris vitae. Quis vel eros donec ac. Justo eget magna fermentum iaculis eu. Enim eu turpis egestas pretium aenean pharetra. A scelerisque purus semper eget duis at. Facilisis volutpat est velit egestas dui id. Metus aliquam eleifend mi in. Dictum varius duis at consectetur. Tortor condimentum lacinia quis vel eros donec ac odio tempor. Scelerisque mauris pellentesque pulvinar pellentesque. Id aliquet risus feugiat in ante metus. Accumsan in nisl nisi scelerisque eu. Et pharetra pharetra massa massa ultricies mi quis. Scelerisque eu ultrices vitae auctor eu augue ut lectus. Velit dignissim sodales ut eu sem. Enim neque volutpat ac tincidunt vitae. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Turpis in eu mi bibendum. Commodo ullamcorper a lacus vestibulum sed arcu non odio euismod. Nulla porttitor massa id neque aliquam vestibulum morbi blandit cursus. Eget sit amet tellus cras adipiscing enim eu. Et molestie ac feugiat sed lectus vestibulum mattis. Nullam ac tortor vitae purus.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/related/{{relatedContentId}}",
+              "host": ["{{url}}"],
+              "path": ["related", "{{relatedContentId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "https://vitaminacursos-server.squad21hackatho.repl.co",
+      "type": "string"
+    },
+    {
+      "key": "bearertoken",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzNkN2JjOGUzZjY1YzIyY2QxMjk2OSIsImlhdCI6MTY2ODUzNjI1MiwiZXhwIjoxNjY4NjIyNjUyfQ.vlmAE0CB-WA7RMfQao1fZ51HMFuF6Sic-JdnVYGsD0E",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "6373d7bc8e3f65c22cd12969",
+      "type": "string"
+    },
+    {
+      "key": "courseId",
+      "value": "6373d8508e3f65c22cd12993",
+      "type": "string"
+    },
+    {
+      "key": "lessonId",
+      "value": "6373da3d8e3f65c22cd12a3c",
+      "type": "string"
+    },
+    {
+      "key": "commentId",
+      "value": "6373daa28e3f65c22cd12a4e",
+      "type": "string"
+    },
+    {
+      "key": "relatedContentId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
