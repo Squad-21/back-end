@@ -7,7 +7,7 @@ const cloudinary = require('../loaders/cloudinary');
 // TODO: MIDDLEWARE PARA O USUARIO LOGADO PODER EDITAR SOMENTE OS PROPRIOS DADOS
 
 const generateToken = (user = {}) => {
-  return jwt.sign({ id: user._id }, authConfig.secret, { expiresIn: 86400 });
+  return jwt.sign({ id: user._id }, authConfig.secret, { expiresIn: 1209600 });
 };
 
 const uploadAvatar = async (image = File) => {
@@ -84,8 +84,8 @@ class UserController {
         const imageUploaded = await uploadAvatar(req.body.avatar);
         req.body.avatar = {
           public_id: imageUploaded.public_id,
-          url: imageUploaded.url
-        }
+          url: imageUploaded.url,
+        };
       }
 
       const newUser = await UserModel.findByIdAndUpdate(id, req.body, {
